@@ -231,3 +231,77 @@ export PROMPT RPROMPT
 
 export CLICOLOR=0
 export LSCOLORS=CxFxExDxBxegedabagacad
+#
+# resty - A tiny command line REST interface for bash.
+#
+# Fork me on github:
+#   http://github.com/micha/resty
+#
+# Author:
+#   Micha Niskin <micha@thinkminimo.com>
+#   Copyright 2009, no rights reserved.
+#
+
+function resty() {
+  local conf="${HOME}/.restyrc"
+  local host=`cat "$conf" 2>/dev/null`
+  local method="$1";          [[ $# > 0 ]] && shift
+  local uri="$1";             [[ $# > 0 ]] && shift;
+  local h2t=html2text;        which $h2t >/dev/null || h2t=cat
+  local accp="Accept: application/json"
+  local opt dat res ret out err verbose i
+
+  [ -z "$method" ] && cat "$conf" 2>/dev/null && return
+
+  for i in "$@"; do
+    ([ "$i" == "--verbose" ] || echo "$i" | grep -q '^-[a-zA-Z]*v[a-zA-Z]*$') \
+      && verbose="yes"
+  done
+
+  uri="${host//\*/$uri}"
+
+  case "$method" in
+    GET|DELETE|POST|PUT)
+      [ "${method#P}" != "$method" ] && opt="--data-binary" && dat="$1" \
+        && [[ $# > 0 ]] && shift
+      res=$((((curl -sLv -H "$accp" $opt "$dat" -X $method "$@" "$uri" \
+        |sed 's/^/OUT /' && echo) 3>&2 2>&1 1>&3) \
+        |sed 's/^/ERR /' && echo) 2>&1)
+      out=$(echo "$res" |sed '/^OUT /s/^....//p; d')
+      err=$(echo "$res" |sed '/^ERR /s/^....//p; d')
+      ret=$(echo "$err" |sed \
+        '/^.*HTTP\/1\.[01] [0-9][0-9][0-9]/s/.*\([0-9]\)[0-9][0-9].*/\1/p; d' \
+        | tail -n1)
+      [ -n "$err" -a -n "$verbose" ] && echo "$err" 1>&2
+      if [ "$ret" != "2" ]; then
+        [ -n "$out" ] && echo "$out" | $h2t 1>&2
+        return $ret
+      else
+        [ -n "$out" ] && echo "$out"
+      fi
+      ;;
+    http://*|https://*)
+      echo "$method" |grep -q '\*' || method="${method}*"
+      (echo "$method" |tee "$conf") |cat 1>&2
+      ;;
+    *)
+      resty "http://$method"
+      ;;
+  esac
+}
+
+function GET() {
+  resty GET "$@"
+}
+
+function POST() {
+  resty POST "$@"
+}
+
+function PUT() {
+  resty PUT "$@"
+}
+
+function DELETE() {
+  resty DELETE "$@"
+}
