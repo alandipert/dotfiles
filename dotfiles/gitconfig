@@ -1,0 +1,10 @@
+[alias]
+  co = checkout
+  ci = commit
+  st = status
+  br = branch
+[user]
+	email = alan@dipert.org
+	name = Alan Dipert
+[push]
+	default = simple
