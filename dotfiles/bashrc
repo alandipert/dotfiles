@@ -26,3 +26,4 @@ function cdu { # "cd up" - move up $1 directories
 [[ $- = *i* ]] && source "${HOME}/.bash/bash-powerline.sh"
 source "${HOME}/.bash/alias.sh"
 source "${HOME}/.bash/adzerk.sh"
+source "${HOME}/.bash/completion.sh"
