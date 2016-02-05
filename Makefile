@@ -3,7 +3,7 @@ links = $(wildcard ${DOTFILES_DIR}/*/)
 .PHONY: $(links)
 install: $(links)
 $(links):
-	ln -fs $@ ${HOME}/.$(shell basename $@)
+	ln -fns $@ ${HOME}/.$(shell basename $@)
 stale:
 	find ${HOME} -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -print
 clean:

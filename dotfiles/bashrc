@@ -1,17 +1,7 @@
-; -*- mode: sh;-*-
+# -*- mode: sh;-*-
 
-export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
 export PATH="$HOME/.local/bin:$PATH"
 export TERM=xterm-color
-export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
-export CLICOLOR=1
-export LSCOLORS=ExFxCxDxBxegedabagacad
-
-alias g=git
-alias pbcopy='xsel --clipboard --input'
-alias pbpaste='xsel --clipboard --output'
-alias ll='ls --color=auto -Flh'
-alias e='emacsclient -nq'
 
 function gc() { # (user-reponame-str)
   local FROM="git@github.com:${1?}"
@@ -24,9 +14,6 @@ function gc() { # (user-reponame-str)
   cd "$TO"
 }
 
-# adzerk
-adzerk_env() {
-  eval "$(gpg -d $HOME/Dropbox/dotfiles/.adzerk.asc)"
-  export AWS_ACCESS_KEY=$ADZERK_AWS_ACCESS_KEY
-  export AWS_SECRET_KEY=$ADZERK_AWS_SECRET_KEY
-}
+[[ $- = *i* ]] && source "${HOME}/.bash/bash-powerline.sh"
+source "${HOME}/.bash/alias.sh"
+source "${HOME}/.bash/adzerk.sh"

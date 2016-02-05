@@ -1,0 +1,9 @@
+*.swn
+*.swo
+*.swp
+\#*\#
+.\#*
+*~
+.boot/
+.nrepl-port
+.nrepl-history
