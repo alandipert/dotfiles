@@ -33,7 +33,7 @@
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'
    dotspacemacs-delete-orphan-packages t
-   dotspacemacs-additional-packages '(inf-clojure)))
+   dotspacemacs-additional-packages '()))
 
 (defun dotspacemacs/init ()
   "Initialization function.
@@ -120,21 +120,25 @@ before layers configuration."
    dotspacemacs-use-ido t))
 
 (defun alandipert/change-font-size (multiplier)
+  "Change the font size globally."
   (set-face-attribute 'default nil :height
                       (floor (* multiplier
                                 (face-attribute 'default :height)))))
 
 (defun alandipert/increase-font-size ()
+  "Increase font size globally."
   (interactive)
   (alandipert/change-font-size 1.10))
 
 (defun alandipert/decrease-font-size ()
+  "Decrease font size globally."
   (interactive)
   (alandipert/change-font-size 0.9))
 
 (defun dotspacemacs/user-config ()
-  "Configuration function.
- This function is called at the very end of Spacemacs initialization after
+  "Configuration function for user code.
+This function is called at the very end of Spacemacs
+initialization after layers configuration. You are free to put
 layers configuration."
   (let* ((extensions! (lambda (mode exts)
                         (dolist (ext exts)
@@ -193,17 +197,4 @@ layers configuration."
 
     ;; Increase and decrease font size globally with SPC o f +/-
     (evil-leader/set-key "of+" 'alandipert/increase-font-size)
-    (evil-leader/set-key "of-" 'alandipert/decrease-font-size)
-
-    ;; Default inferior Lisps
-    (setq
-     inferior-lisp-program "~/.local/bin/ecl"
-     inf-clojure-program "boot repl")
-
-    ;; Configure inf-clojure, a package we installed without a layer. Requires
-    ;; disabling cider mode in inf-clojure-minor-mode buffers for keys to work.
-    (use-package inf-clojure
-      :init
-      (add-hook 'clojure-mode-hook #'inf-clojure-minor-mode)
-      (add-hook 'clojure-mode-hook #'eldoc-mode)
-      (add-hook 'inf-clojure-mode-hook #'eldoc-mode))))
+    (evil-leader/set-key "of-" 'alandipert/decrease-font-size)))
