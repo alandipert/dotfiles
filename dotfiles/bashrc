@@ -14,6 +14,15 @@ function gc() { # (user-reponame-str)
   cd "$TO"
 }
 
+function cdu { # "cd up" - move up $1 directories
+  local num;
+  num=${1:-1}
+  while [[ $num > 0 ]]; do
+    cd ..
+    (( num-- ))
+  done
+}
+
 [[ $- = *i* ]] && source "${HOME}/.bash/bash-powerline.sh"
 source "${HOME}/.bash/alias.sh"
 source "${HOME}/.bash/adzerk.sh"
