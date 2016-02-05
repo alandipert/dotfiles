@@ -5,7 +5,7 @@ My dotfiles. I clone this on machines I use and type `make` to synchronize the
 
 Installation:
 
-    git clone https://github.com/alandipert/dotfiles.git && make
+    git clone https://github.com/alandipert/dotfiles.git && cd dotfiles && make
     
 Housekeeping:
 
