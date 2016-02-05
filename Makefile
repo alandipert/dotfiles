@@ -1,14 +1,9 @@
-DOTFILES_DIR := $(shell pwd)
-LN_FLAGS = -fs
-symlinks = \
-	bash_profile \
-	screenrc \
-	tmux.conf \
-	vimrc
-.PHONY: $(symlinks)
-install: $(symlinks)
-$(symlinks):
-	ln $(LN_FLAGS) $(DOTFILES_DIR)/$@ ${HOME}/.$@
+DOTFILES_DIR := $(shell pwd)/dotfiles
+links = $(wildcard ${DOTFILES_DIR}/*/)
+.PHONY: $(links)
+install: $(links)
+$(links):
+	ln -fs $@ ${HOME}/.$(shell basename $@)
 stale:
 	find ${HOME} -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -print
 clean:
