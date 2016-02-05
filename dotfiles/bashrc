@@ -1,7 +1,7 @@
 # -*- mode: sh;-*-
 
 export PATH="$HOME/.local/bin:$PATH"
-export TERM=xterm-color
+export TERM=xterm-256color
 
 function gc() { # (user-reponame-str)
   local FROM="git@github.com:${1?}"
