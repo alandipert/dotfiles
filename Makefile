@@ -4,7 +4,3 @@ links = $(wildcard ${DOTFILES_DIR}/*/)
 install: $(links)
 $(links):
 	ln -fns $@ ${HOME}/.$(shell basename $@)
-stale:
-	find ${HOME} -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -print
-clean:
-	find ${HOME} -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -delete
