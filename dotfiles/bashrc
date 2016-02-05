@@ -1,5 +1,6 @@
 # -*- mode: sh;-*-
 
+export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
 export PATH="$HOME/.local/bin:$PATH"
 export TERM=xterm-color
 
@@ -23,7 +24,6 @@ function cdu { # "cd up" - move up $1 directories
   done
 }
 
-[[ $- = *i* ]] && source "${HOME}/.bash/bash-powerline.sh"
 source "${HOME}/.bash/alias.sh"
 source "${HOME}/.bash/adzerk.sh"
 source "${HOME}/.bash/completion.sh"
