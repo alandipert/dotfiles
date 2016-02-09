@@ -6,5 +6,3 @@
 [user]
 	email = alan@dipert.org
 	name = Alan Dipert
-[push]
-	default = simple
