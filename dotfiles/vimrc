@@ -1,8 +1,3 @@
-set foldcolumn=3
-set foldmethod=syntax
-set foldnestmax=2
-set foldenable
-set foldlevelstart=1
 set number
 syntax on
 
