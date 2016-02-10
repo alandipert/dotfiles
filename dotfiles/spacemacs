@@ -68,7 +68,7 @@ before layers configuration."
    dotspacemacs-leader-key "SPC"
    ;; Major mode leader key is a shortcut key which is the equivalent of
    ;; pressing `<leader> m`. Set it to `nil` to disable it.
-   dotspacemacs-emacs-leader-key "C-."
+   dotspacemacs-emacs-leader-key "M-m"
    dotspacemacs-major-mode-leader-key ","
    ;; The command key used for Evil commands (ex-commands) and
    ;; Emacs commands (M-x).
