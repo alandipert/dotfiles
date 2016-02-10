@@ -159,6 +159,12 @@ layers configuration."
           sgml-basic-offset 2
           web-mode-markup-indent-offset 2)
 
+    (add-hook 'sml-mode-hook
+              (lambda ()
+                (setq sml-indent-level 2
+                      words-include-escape t
+                      indent-tabs-mode nil)))
+
     (add-hook 'java-mode-hook (lambda ()
                                 (setq c-basic-offset 2)))
     (add-hook 'css-mode-hook (lambda ()
@@ -166,6 +172,9 @@ layers configuration."
     (add-hook 'sh-mode-hook (lambda ()
                               (setq sh-basic-offset 2
                                     sh-basic-indent-line 2)))
+
+    ;; Add mlton mlb files as SML
+    (funcall extensions! 'sml-mode '("\\.mlb\\'"))
 
     ;; Clojure indentation for Boot, Hoplon, and ClojureScript files.
     (funcall extensions! 'clojure-mode '("\\.boot\\'" "\\.cljs\\'" "\\.cljs.hl\\'"))
