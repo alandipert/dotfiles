@@ -17,7 +17,7 @@ function gc() { # (user-reponame-str)
   cd "$TO"
 }
 
-function cdu { # "cd up" - move up $1 directories
+function .. { # "cd up" - move up $1 directories
   local num;
   num=${1:-1}
   while [[ $num > 0 ]]; do
