@@ -41,3 +41,5 @@ ssh-reagent () {
 source "${HOME}/.bash/alias.sh"
 source "${HOME}/.bash/adzerk.sh"
 source "${HOME}/.bash/completion.sh"
+
+ssh-add ~/.ssh/*.pem |& > /dev/null
