@@ -7,8 +7,6 @@ defscrollback 10000
 bind R screen -t '# |root:' sudo -H /bin/bash
 bind a focus
 
-escape ^Bb
-
 screen 
 screen 
 screen 
