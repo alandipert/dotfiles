@@ -205,10 +205,10 @@ layers configuration."
 
     (evil-leader/set-key "ol"  'evil-lisp-state)
     ;; Don't automatically enter lisp-state after invoking a lisp state command
-    (setq evil-lisp-state-enter-lisp-state-on-command nil)
+    ;; (setq evil-lisp-state-enter-lisp-state-on-command nil)
 
     ;; Make the line number gutter look cool
-    (setq linum-format "%4d｜ ")
+    (setq linum-format "%4d \u2503")
 
     ;; Increase and decrease font size globally with SPC o f +/-
     (evil-leader/set-key "of+" 'alandipert/increase-font-size)
