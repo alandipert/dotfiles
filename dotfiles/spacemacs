@@ -141,6 +141,7 @@ before layers configuration."
 This function is called at the very end of Spacemacs
 initialization after layers configuration. You are free to put
 layers configuration."
+  (require 'multiple-cursors)
   (let* ((extensions! (lambda (mode exts)
                         (dolist (ext exts)
                           (add-to-list 'auto-mode-alist (cons ext mode))))))
