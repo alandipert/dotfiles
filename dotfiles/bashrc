@@ -42,4 +42,6 @@ source "${HOME}/.bash/alias.sh"
 source "${HOME}/.bash/adzerk.sh"
 source "${HOME}/.bash/completion.sh"
 
+[[ -e "${HOME}/.localrc" ]] && source "${HOME}/.localrc"
+
 ssh-add ~/.ssh/*.pem &>/dev/null
