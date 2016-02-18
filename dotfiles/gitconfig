@@ -3,6 +3,7 @@
   ci = commit
   st = status
   br = branch
+  a  = add
 [user]
 	email = alan@dipert.org
 	name = Alan Dipert

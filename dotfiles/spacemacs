@@ -208,8 +208,16 @@ layers configuration."
     (setq evil-lisp-state-enter-lisp-state-on-command nil)
 
     ;; Make the line number gutter look cool
-    (setq linum-format "%4d｜ ")
+    (setq linum-format "%4d \u2502 ")
 
     ;; Increase and decrease font size globally with SPC o f +/-
     (evil-leader/set-key "of+" 'alandipert/increase-font-size)
-    (evil-leader/set-key "of-" 'alandipert/decrease-font-size)))
+    (evil-leader/set-key "of-" 'alandipert/decrease-font-size)
+
+    (defadvice isearch-search (after isearch-no-fail activate)
+      (unless isearch-success
+        (ad-disable-advice 'isearch-search 'after 'isearch-no-fail)
+        (ad-activate 'isearch-search)
+        (isearch-repeat (if isearch-forward 'forward))
+        (ad-enable-advice 'isearch-search 'after 'isearch-no-fail)
+              (ad-activate 'isearch-search)))))
