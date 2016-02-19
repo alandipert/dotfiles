@@ -5,6 +5,8 @@ export PATH="${HOME}/.local/bin:${PATH}"
 export TERM=xterm-256color
 # Requires bash-completion package
 export CDPATH=${HOME}/github:${HOME}/bitbucket
+# For truecolor in new tmux
+export KONSOLE_DBUS_SESSION=true
 
 function gc() { # (user-reponame-str)
   local FROM="git@github.com:${1?}"
