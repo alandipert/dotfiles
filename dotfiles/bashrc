@@ -24,7 +24,7 @@ function .. { # "cd up" - move up $1 directories
   local dest;
   num=${1:-1}
   while [[ $num > 0 ]]; do
-    str="../${dest}"
+    dest="../${dest}"
     (( num-- ))
   done
   cd "${dest}"
