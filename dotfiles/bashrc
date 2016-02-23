@@ -20,14 +20,7 @@ function gc() { # (user-reponame-str)
 }
 
 function .. { # "cd up" - move up $1 directories
-  local num;
-  local dest;
-  num=${1:-1}
-  while [[ $num > 0 ]]; do
-    dest="../${dest}"
-    (( num-- ))
-  done
-  cd "${dest}"
+  cd $(printf '..%0.s/' $(seq -s ' ' 1 ${1:-1}))
 }
 
 ssh-reagent () {
