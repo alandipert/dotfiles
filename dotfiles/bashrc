@@ -20,7 +20,7 @@ function gc() { # (user-reponame-str)
 }
 
 function .. { # "cd up" - move up $1 directories
-  cd $(printf '..%0.s/' $(seq -s ' ' 1 ${1:-1}))
+  cd $(printf '../%0.s' $(seq -s ' ' 1 ${1:-1}))
 }
 
 ssh-reagent () {
