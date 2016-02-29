@@ -194,6 +194,9 @@ layers configuration."
               title tr track tt u ul html-var video wbr))
 
     (add-hook 'clojure-mode-hook
+              '(lambda () (prettify-symbols-mode)))
+
+    (add-hook 'clojure-mode-hook
               '(lambda ()
                  (dolist (el html5-elements)
                    (put-clojure-indent el 'defun))))
@@ -203,6 +206,9 @@ layers configuration."
                  ;; Hoplon functions and macros
                  (dolist (sym '(page loop-tpl))
                    (put-clojure-indent sym 'defun))))
+
+    (add-hook 'sml-mode-hook
+              '(lambda () (prettify-symbols-mode)))
 
     (evil-leader/set-key "ol"  'evil-lisp-state)
     ;; Don't automatically enter lisp-state after invoking a lisp state command
