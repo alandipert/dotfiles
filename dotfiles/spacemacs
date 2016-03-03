@@ -220,6 +220,10 @@ layers configuration."
     ;; Increase and decrease font size globally with SPC o f +/-
     (evil-leader/set-key "of+" 'alandipert/increase-font-size)
     (evil-leader/set-key "of-" 'alandipert/decrease-font-size)
+    (evil-leader/set-key "ofr" 'redraw-display)
+
+    ;; Puts the time in the modeline
+    (display-time-mode 1)
 
     (defadvice isearch-search (after isearch-no-fail activate)
       (unless isearch-success
