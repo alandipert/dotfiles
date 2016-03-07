@@ -1,7 +1,7 @@
 # -*- mode: sh;-*-
 
 export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
-export PATH="${HOME}/.local/bin:${PATH}"
+export PATH="${HOME}/.cabal/bin:${HOME}/.local/bin:${PATH}"
 export TERM=xterm-256color
 # Requires bash-completion package
 export CDPATH=${HOME}/github:${HOME}/bitbucket
