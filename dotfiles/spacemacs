@@ -207,6 +207,8 @@ layers configuration."
                  (dolist (sym '(page loop-tpl))
                    (put-clojure-indent sym 'defun))))
 
+    (setq cider-boot-parameters "cider repl -s wait")
+
     (add-hook 'sml-mode-hook
               '(lambda () (prettify-symbols-mode)))
 
