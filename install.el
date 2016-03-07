@@ -49,7 +49,7 @@
 
 (defmethod clean-dotfile :default (dotfile)
   (let* ((dest (dotfile-dest dotfile)))
-    (when (file-exists-p dest) 
+    (when (file-exists-p dest)
       (rm dest))))
 
 (defmulti install-dotfile #'dotfile-name)
@@ -66,18 +66,15 @@
     (when (file-exists-p old-boot-profile)
       (rm old-boot-profile))))
 
-;; make initial dotfiles
-
-(defun collect-dotfiles (dir)
-  (cl-loop for f in (directory-files dir)
-           when (not (string-prefix-p "." f))
-           collect (make-dotfile :name f
-                                 :src (concat dir "/" f)
-                                 :dest (concat (getenv "HOME") "/." f))))
+;; main
 
 (setq dotfiles-dir (or (elt argv 1) "dotfiles"))
 (message "Dotfiles directory is '%s'" dotfiles-dir)
-(setq dotfiles (collect-dotfiles dotfiles-dir))
 
-(dolist (dotfile dotfiles) (clean-dotfile dotfile))
-(dolist (dotfile dotfiles) (install-dotfile dotfile))
+(cl-loop for f in (directory-files dotfiles-dir)
+         when (not (string-prefix-p "." f))
+         do (let* ((dotfile (make-dotfile :name f
+                                          :src (concat dotfiles-dir "/" f)
+                                          :dest (concat (getenv "HOME") "/." f))))
+              (clean-dotfile dotfile)
+              (install-dotfile dotfile)))
