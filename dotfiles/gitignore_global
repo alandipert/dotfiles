@@ -5,5 +5,4 @@
 .\#*
 *~
 .boot/
-.nrepl-port
-.nrepl-history
+.nrepl-*
