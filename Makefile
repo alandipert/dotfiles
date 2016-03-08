@@ -5,6 +5,7 @@ install: $(links)
 $(links):
 	ln -fns $@ ${HOME}/.$(shell basename $@)
 clean:
+	git clean -fdx
 	for link in $(links); do \
 		rm -rf $${HOME}/.$$(basename $$link); \
 	done
