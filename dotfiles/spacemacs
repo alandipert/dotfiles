@@ -229,6 +229,13 @@ layers configuration."
     ;; Puts the time in the modeline
     (display-time-mode 1)
 
+    ;; Open .asc/.gpg files with decrypt/encrypt magic
+    (require 'epa-file)
+    (epa-file-enable)
+    (setq epa-file-name-regexp "\\.\\(gpg\\|asc\\)$"
+          epa-armor t)
+    (epa-file-name-regexp-update)
+
     (defadvice isearch-search (after isearch-no-fail activate)
       (unless isearch-success
         (ad-disable-advice 'isearch-search 'after 'isearch-no-fail)
