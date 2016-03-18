@@ -237,7 +237,7 @@ layers configuration."
     (epa-file-name-regexp-update)
 
     ;; indent guide is awesome, turn it on all the time
-    (spacemacs/toggle-aggressive-indent-globally-on)
+    (spacemacs/toggle-indent-guide-globally-on)
     (setq indent-guide-recursive t)
 
     (defadvice isearch-search (after isearch-no-fail activate)
