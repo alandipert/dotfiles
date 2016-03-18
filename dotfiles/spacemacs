@@ -151,7 +151,7 @@ layers configuration."
     ;; Put customizations in ~/.custom.el, creating it if necessary.
     (setq custom-file "~/.custom.el")
     (when (not (file-exists-p "~/.custom.el"))
-        (write-region nil nil "~/.custom.el"))
+      (write-region nil nil "~/.custom.el"))
     (load custom-file)
 
     ;; Favorite indents for various modes.
@@ -236,10 +236,14 @@ layers configuration."
           epa-armor t)
     (epa-file-name-regexp-update)
 
+    ;; indent guide is awesome, turn it on all the time
+    (spacemacs/toggle-aggressive-indent-globally-on)
+    (setq indent-guide-recursive t)
+
     (defadvice isearch-search (after isearch-no-fail activate)
       (unless isearch-success
         (ad-disable-advice 'isearch-search 'after 'isearch-no-fail)
         (ad-activate 'isearch-search)
         (isearch-repeat (if isearch-forward 'forward))
         (ad-enable-advice 'isearch-search 'after 'isearch-no-fail)
-              (ad-activate 'isearch-search)))))
+        (ad-activate 'isearch-search)))))
