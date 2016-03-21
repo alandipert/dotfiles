@@ -180,5 +180,3 @@ mode "move" {
         bindsym Escape mode "default"
 }
 bindsym $mod+m mode "move"
-
-exec ~/.local/bin/dropbox-start
