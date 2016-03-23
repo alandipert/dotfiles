@@ -138,6 +138,12 @@ before layers configuration."
   (interactive)
   (alandipert/change-font-size 0.9))
 
+(defun alandipert/fix-frame ()
+  "Toggle fullscreen on an off.  i3 workaround."
+  (interactive)
+  (spacemacs/toggle-fullscreen-frame-on)
+  (spacemacs/toggle-fullscreen-frame-off))
+
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs
@@ -224,7 +230,8 @@ layers configuration."
     ;; Increase and decrease font size globally with SPC o f +/-
     (evil-leader/set-key "of+" 'alandipert/increase-font-size)
     (evil-leader/set-key "of-" 'alandipert/decrease-font-size)
-    (evil-leader/set-key "ofr" 'redraw-display)
+    (evil-leader/set-key "or" 'redraw-display)
+    (evil-leader/set-key "ot" 'alandipert/fix-frame)
 
     ;; Puts the time in the modeline
     (display-time-mode 1)
