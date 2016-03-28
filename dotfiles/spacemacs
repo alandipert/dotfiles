@@ -233,6 +233,9 @@ layers configuration."
     (evil-leader/set-key "or" 'redraw-display)
     (evil-leader/set-key "ot" 'alandipert/fix-frame)
 
+    (when (eq window-system 'x)
+      (alandipert/fix-frame))
+
     ;; Puts the time in the modeline
     (display-time-mode 1)
 
