@@ -37,5 +37,5 @@ source "${HOME}/.bash/completion.sh"
 
 [[ -e "${HOME}/.localrc" ]] && source "${HOME}/.localrc"
 
-ssh-add ~/.ssh/*.pem  &>/dev/null
+ssh-add ~/.ssh/adzerk.pem &>/dev/null
 ssh-add ~/.ssh/id_rsa &>/dev/null
