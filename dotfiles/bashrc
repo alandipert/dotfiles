@@ -19,6 +19,10 @@ function .. { # "cd up" - move up $1 directories
   cd $(printf '../%0.s' $(seq -s ' ' 1 ${1:-1}))
 }
 
+function nth {
+  awk "{print \$$1}";
+}
+
 sr () {
   for agent in /tmp/ssh-*/agent.*; do
     export SSH_AUTH_SOCK=$agent
