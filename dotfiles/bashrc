@@ -23,6 +23,10 @@ function nth {
   awk "{print \$$1}";
 }
 
+function nthrest () {
+  awk "{$(seq -s '' -f '$%.f=' 1 $1)\"\"; print \$0}" | sed -e 's/^\s*//';
+}
+
 sr () {
   for agent in /tmp/ssh-*/agent.*; do
     export SSH_AUTH_SOCK=$agent
