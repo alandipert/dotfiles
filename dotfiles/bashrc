@@ -3,6 +3,7 @@
 export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
 export PATH="${HOME}/.cabal/bin:${HOME}/.local/bin:/usr/local/bin:${PATH}"
 export TERM=xterm-256color
+export EDITOR=mg
 
 function gc() { # (user-reponame-str)
   local FROM="git@github.com:${1?}"
