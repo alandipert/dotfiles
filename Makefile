@@ -7,5 +7,5 @@ $(links):
 uninstall:
 	git clean -fdx
 	for link in $(links); do \
-		rm -rf $${HOME}/.$$(basename $$link); \
+		rm -f $${HOME}/.$$(basename $$link); \
 	done
