@@ -215,10 +215,12 @@ layers configuration."
                  (dolist (sym '(page loop-tpl))
                    (put-clojure-indent sym 'defun))))
 
-	;; Clojure friendly word definitions in Emacs
-	;; https://timothypratley.blogspot.com/2014/08/clojure-friendly-word-definitions-in.html
-	(dolist (c (string-to-list ":_-?!#*"))
-	  (modify-syntax-entry c "w" emacs-lisp-mode-syntax-table))
+    (add-hook 'clojure-mode-hook
+              '(lambda ()
+                 ;; Clojure friendly word definitions in Emacs
+                 ;; https://timothypratley.blogspot.com/2014/08/clojure-friendly-word-definitions-in.html
+                 (dolist (c (string-to-list ":_-?!#*"))
+                   (modify-syntax-entry c "w" emacs-lisp-mode-syntax-table))))
 
     (setq cider-boot-parameters "cider repl -s wait")
 
