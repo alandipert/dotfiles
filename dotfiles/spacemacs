@@ -23,7 +23,7 @@
                                        (ibuffer :variables ibuffer-group-buffers-by 'projects ibuffer-old-time 8)
                                        javascript
                                        markdown
-                                       org
+                                       (org :variables org-journal-dir "~/Dropbox/Documents/Alan/journal")
                                        shell
                                        sml
                                        syntax-checking
@@ -36,7 +36,7 @@
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'
    dotspacemacs-delete-orphan-packages t
-   dotspacemacs-additional-packages '()))
+   dotspacemacs-additional-packages '(org-journal)))
 
 (defun dotspacemacs/init ()
   "Initialization function.
