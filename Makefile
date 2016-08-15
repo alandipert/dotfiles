@@ -1,5 +1,4 @@
 DOTFILES_DIR := $(shell pwd)/dotfiles
-PRE_ARG := $(shell mkdir -p ${HOME}/.local/foobar/bin)
 links = $(wildcard ${DOTFILES_DIR}/*/)
 .PHONY: $(links)
 install: $(links)

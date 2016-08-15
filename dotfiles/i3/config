@@ -186,3 +186,6 @@ mode "move" {
         bindsym Escape mode "default"
 }
 bindsym $mod+m mode "move"
+
+# Screenshot to Dropbox script
+bindsym --release $mod+Print exec /home/alan/.snap.sh
