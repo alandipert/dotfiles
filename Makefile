@@ -3,6 +3,7 @@ links = $(wildcard ${DOTFILES_DIR}/*/)
 .PHONY: $(links)
 install: $(links)
 $(links):
+	mkdir -p ${HOME}/.local/bin
 	ln -fns $@ ${HOME}/.$(shell basename $@)
 uninstall:
 	git clean -fdx
