@@ -188,4 +188,4 @@ mode "move" {
 bindsym $mod+m mode "move"
 
 # Screenshot to Dropbox script
-bindsym --release $mod+Print exec /home/alan/.snap.sh
+bindsym --release $mod+Print exec ~/.snap.sh
