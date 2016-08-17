@@ -10,6 +10,17 @@ mkdir -p $HOME/gocode
 export GOPATH=$HOME/gocode
 export PATH="${GOPATH}/bin:$PATH"
 
+# improve history stuff
+# https://sanctum.geek.nz/arabesque/better-bash-history/
+shopt -s histappend
+shopt -s cmdhist
+export HISTFILESIZE=1000000
+export HISTSIZE=1000000
+export HISTCONTROL=ignoreboth
+export HISTIGNORE='ls:bg:fg:history'
+export HISTTIMEFORMAT='%F %T '
+export PROMPT_COMMAND='history -a'
+
 function gc() { # (user-reponame-str)
   local FROM="git@github.com:${1?}"
   local TO="$HOME/github/${1?}"
