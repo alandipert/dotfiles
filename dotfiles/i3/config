@@ -37,7 +37,10 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run -fn 'Ubuntu Mono-12'
-bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -fn 'Ubuntu Mono-12'"
+#bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -fn 'Ubuntu Mono-12'"
+
+# start dmenu with window list
+bindsym $mod+Shift+d exec ~/.i3/window-jump
 
 # change focus
 bindsym $mod+n focus left
@@ -188,4 +191,4 @@ mode "move" {
 bindsym $mod+m mode "move"
 
 # Screenshot to Dropbox script
-bindsym --release $mod+Print exec ~/.snap.sh
+bindsym --release $mod+Print exec ~/.i3/snap.sh
