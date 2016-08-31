@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-emacsclient -a emacs --no-wait -c "$@"
+emacsclient -a '' --no-wait -c "$@"

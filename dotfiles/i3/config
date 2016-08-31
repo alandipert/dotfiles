@@ -42,6 +42,9 @@ bindsym $mod+d exec dmenu_run -fn 'Ubuntu Mono-12'
 # start dmenu with window list
 bindsym $mod+Shift+d exec ~/.i3/window-jump
 
+# emacs
+bindsym $mod+period exec ~/.bash/e
+
 # change focus
 bindsym $mod+n focus left
 bindsym $mod+e focus down
