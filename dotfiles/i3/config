@@ -45,6 +45,9 @@ bindsym $mod+Shift+d exec ~/.i3/window-jump
 # emacs
 bindsym $mod+period exec ~/.bash/e
 
+# chrome
+bindsym $mod+Control+period exec /usr/bin/google-chrome
+
 # change focus
 bindsym $mod+n focus left
 bindsym $mod+e focus down
