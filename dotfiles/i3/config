@@ -48,6 +48,9 @@ bindsym $mod+period exec ~/.bash/e
 # chrome
 bindsym $mod+Control+period exec /usr/bin/google-chrome
 
+# calc
+bindsym $mod+Shift+plus exec gnome-calculator
+
 # change focus
 bindsym $mod+n focus left
 bindsym $mod+e focus down
