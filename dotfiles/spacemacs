@@ -249,6 +249,9 @@ layers configuration."
     (spacemacs/toggle-indent-guide-globally-on)
     (setq indent-guide-recursive t)
 
+    ;; set frame titles to include word emacs for easier searching
+    (setq frame-title-format "emacs [%b]")
+
     (defadvice isearch-search (after isearch-no-fail activate)
       (unless isearch-success
         (ad-disable-advice 'isearch-search 'after 'isearch-no-fail)
