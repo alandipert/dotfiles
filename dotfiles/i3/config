@@ -201,3 +201,7 @@ bindsym $mod+m mode "move"
 
 # Screenshot to Dropbox script
 bindsym --release $mod+Print exec ~/.i3/snap.sh
+
+# Focus-last
+bindsym $mod+Tab exec ~/.i3/focus-last.py --switch
+exec --no-startup-id "~/.i3/focus-last.py"
