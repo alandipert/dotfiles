@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+$HOME/.i3/focus-last.py
