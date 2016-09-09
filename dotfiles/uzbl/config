@@ -1,6 +1,9 @@
 # Example uzbl config. All settings are optional. You can use uzbl without
 # any config at all (but it won't do much).
 
+# === Caching proxy config ===================================================
+set proxy_url = http://127.0.0.1:8123
+
 # === Core settings ==========================================================
 
 # common directory locations
@@ -268,7 +271,7 @@ set ebind     = @mode_bind global,-insert
 @cbind  -   = zoom_out
 @cbind  T   = toggle zoom_type
 @cbind  1   = set zoom_level = 1.0
-@cbind  2   = set zoom_level = 2.0
+@cbind  2   = set zoom_level = 1.5
 
 # Appearance binds
 @cbind  t   = toggle show_status
