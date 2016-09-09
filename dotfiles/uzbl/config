@@ -51,7 +51,7 @@ set download_handler    = sync_spawn @scripts_dir/download.sh
 
 #   What to do when a website wants to open a new window:
 # Open link in new window
-@on_event   NEW_WINDOW     sh 'uzbl-browser ${1:+-u "$1"}' %r
+@on_event   NEW_WINDOW     sh 'uzbl-browser -c ~/.uzbl/config ${1:+-u "$1"}' %r
 # Open in current window (also see the REQ_NEW_WINDOW event handler below)
 #@on_event   NEW_WINDOW     uri %s
 # Open in new tab. Other options are NEW_TAB_NEXT, NEW_BG_TAB and NEW_BG_TAB_NEXT.
@@ -135,7 +135,8 @@ set progress.pending    =
 
 # === Useragent setup ========================================================
 
-set useragent         = Uzbl (Webkit @{WEBKIT_MAJOR}.@{WEBKIT_MINOR}) (@(+uname -sm)@ [@ARCH_UZBL])
+#set useragent         = Uzbl (Webkit @{WEBKIT_MAJOR}.@{WEBKIT_MINOR}) (@(+uname -sm)@ [@ARCH_UZBL])
+set useragent = Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12
 
 # === Configure cookie blacklist ========================================================
 
