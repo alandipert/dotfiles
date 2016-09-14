@@ -23,7 +23,9 @@
                                        (ibuffer :variables ibuffer-group-buffers-by 'projects ibuffer-old-time 8)
                                        javascript
                                        markdown
-                                       (org :variables org-journal-dir "~/Dropbox/Documents/Alan/journal")
+                                       (org :variables
+                                            org-todo-keywords (quote ((sequence "TODO" "ONGOING" "DONE")))
+                                            org-todo-keyword-faces '(("ONGOING" . "orange")))
                                        shell
                                        sml
                                        syntax-checking
@@ -206,7 +208,7 @@ layers configuration."
       (prettify-symbols-mode)
 
       ;; Hoplon functions and macros
-      (dolist (sym (append html5-elements '(page loop-tpl)))
+      (dolist (sym (append html5-elements '(page loop-tpl for-tpl match)))
         (put-clojure-indent sym 'defun))
 
       ;; Clojure friendly word definitions in Emacs
