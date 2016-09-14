@@ -20,7 +20,7 @@ def get_containers tree
     containers
 end
 
-IO.popen(['dmenu', '-i', '-p', 'window jump'], 'r+') do |dmenu|
+IO.popen(['dmenu', '-sb', '#adff2f', '-sf', '#000000', '-i', '-p', 'window jump'], 'r+') do |dmenu|
     tree = `i3-msg -t get_tree`
     json = get_containers(JSON.load(tree))
     p json
