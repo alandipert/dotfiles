@@ -53,7 +53,7 @@ bindsym $mod+Shift+d exec ~/.i3/window-jump
 bindsym $mod+period exec ~/.bash/e
 
 # browsers
-bindsym $mod+Control+period exec /usr/bin/google-chrome
+bindsym $mod+Control+period exec /usr/bin/chromium-browser
 bindsym $mod+Control+comma exec /usr/bin/uzbl-browser -c ~/.uzbl/config
 
 # calc
