@@ -178,6 +178,9 @@ bindsym $mod+p mode "resize"
 bar {
         # status_command i3status
         tray_output primary
+        colors {
+          focused_workspace  #adff2f #000000 #ffffff
+        }
 }
 
 mode "move" {
