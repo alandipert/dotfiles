@@ -409,6 +409,9 @@ you should place your code here."
     (evil-leader/set-key "or" 'redraw-display)
     (evil-leader/set-key "ot" 'alandipert/fix-frame)
 
+    ;; jump shortcut
+    (evil-leader/set-key "oo" 'evil-avy-goto-line)
+
     (when (eq window-system 'x)
       (alandipert/fix-frame))
 
