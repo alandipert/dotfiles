@@ -54,7 +54,6 @@ bindsym $mod+period exec ~/.bash/e
 
 # browsers
 bindsym $mod+Control+period exec /usr/bin/chromium-browser
-bindsym $mod+Control+comma exec /usr/bin/uzbl-browser -c ~/.uzbl/config
 
 # calc
 bindsym $mod+Shift+plus exec gnome-calculator
@@ -220,3 +219,8 @@ exec_always --no-startup-id ~/.i3/focus-last.py
 
 # Set background color
 exec --no-startup-id xsetroot -solid "#333333"
+
+# Unity stuff (16.04)
+bindsym $mod+Control+comma exec ~/.i3/ucc
+exec --no-startup-id unity-settings-daemon
+exec --no-startup-id nm-applet
