@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+set -e
+unset XDG_CURRENT_DESKTOP; unity-control-center
