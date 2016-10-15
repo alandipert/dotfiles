@@ -1,2 +1,0 @@
-setxkbmap us colemak
-setxkbmap -option caps:ctrl_modifier
