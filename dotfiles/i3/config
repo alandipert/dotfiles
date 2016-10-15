@@ -220,7 +220,13 @@ exec_always --no-startup-id ~/.i3/focus-last.py
 # Set background color
 exec --no-startup-id xsetroot -solid "#333333"
 
-# Unity stuff (16.04)
+# Unity/applet stuff (16.04)
 bindsym $mod+Control+comma exec ~/.i3/ucc
 exec --no-startup-id unity-settings-daemon
 exec --no-startup-id nm-applet
+exec --no-startup-id volumeicon
+
+# volume control keys
+bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 1+ unmute"
+bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 1- unmute"
+bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
