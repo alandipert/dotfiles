@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
+source ~/.bashrc
 exec emacsclient -nw -a '' -c "$@"
