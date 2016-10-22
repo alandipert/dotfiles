@@ -116,16 +116,16 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1 exec "i3-msg workspace 1; i3-msg scratchpad show"
+bindsym $mod+2 exec "i3-msg workspace 2; i3-msg scratchpad show"
+bindsym $mod+3 exec "i3-msg workspace 3; i3-msg scratchpad show"
+bindsym $mod+4 exec "i3-msg workspace 4; i3-msg scratchpad show"
+bindsym $mod+5 exec "i3-msg workspace 5; i3-msg scratchpad show"
+bindsym $mod+6 exec "i3-msg workspace 6; i3-msg scratchpad show"
+bindsym $mod+7 exec "i3-msg workspace 7; i3-msg scratchpad show"
+bindsym $mod+8 exec "i3-msg workspace 8; i3-msg scratchpad show"
+bindsym $mod+9 exec "i3-msg workspace 9; i3-msg scratchpad show"
+bindsym $mod+0 exec "i3-msg workspace 10; i3-msg scratchpad show"
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
