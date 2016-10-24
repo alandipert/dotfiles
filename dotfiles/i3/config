@@ -233,3 +233,6 @@ bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
 
 # double battery stuff
 exec ~/.i3/batt.sh
+
+# Dropbox
+exec /usr/bin/dropbox start
