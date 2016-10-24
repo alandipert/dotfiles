@@ -236,3 +236,6 @@ exec ~/.i3/batt.sh
 
 # Dropbox
 exec /usr/bin/dropbox start
+
+# Flux
+exec /usr/bin/fluxgui
