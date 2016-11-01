@@ -29,8 +29,8 @@ values."
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
-   dotspacemacs-configuration-layers '(auto-completion
-                                       clojure
+   dotspacemacs-configuration-layers '(clojure
+                                       csvauto-completion
                                        docker
                                        emacs-lisp
                                        git
@@ -48,6 +48,7 @@ values."
                                        shell
                                        sml
                                        spell-checking
+                                       sql
                                        syntax-checking
                                        themes-megapack)
    ;; List of additional packages that will be installed without being
