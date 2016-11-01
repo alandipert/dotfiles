@@ -239,3 +239,6 @@ exec /usr/bin/dropbox start
 
 # Flux
 exec /usr/bin/fluxgui
+
+# AutoKey
+exec /usr/bin/autokey-gtk
