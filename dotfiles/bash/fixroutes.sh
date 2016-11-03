@@ -6,4 +6,4 @@ wget -qO - https://ip-ranges.amazonaws.com/ip-ranges.json \
   |sudo bash
   
 # add default route for LAN
-sudo ip route add default via $(route -n|grep ^0|grep -v tun|awk '{print $2}')
+sudo ip route add default via $(route -n|grep ^0|grep -v tun|awk '{print $2}'|head -1)
