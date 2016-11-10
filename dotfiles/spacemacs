@@ -358,9 +358,6 @@ you should place your code here."
     ;; Add mlton mlb files as SML
     (funcall extensions! 'sml-mode '("\\.mlb\\'"))
 
-    ;; Clojure indentation for Boot, Hoplon, and ClojureScript files.
-    (funcall extensions! 'clojure-mode '("\\.boot\\'" "\\.cljs\\'" "\\.cljs.hl\\'"))
-
     (setq html5-elements
           '(a abbr acronym address applet area article aside audio b base basefont
               bdi bdo big blockquote body br button canvas caption center cite code
