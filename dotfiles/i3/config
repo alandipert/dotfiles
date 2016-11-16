@@ -227,9 +227,9 @@ exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 
 # volume control keys
-bindsym XF86AudioRaiseVolume exec "~/.bash/volume.sh 5+"
-bindsym XF86AudioLowerVolume exec "~/.bash/volume.sh 5-"
-bindsym XF86AudioMute exec "~/.bash/volume.sh"
+bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 5+ unmute"
+bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 5- unmute"
+bindsym XF86AudioMute exec "amixer -q -D pulse sset Master toggle"
 
 # double battery stuff
 exec ~/.i3/batt.sh
