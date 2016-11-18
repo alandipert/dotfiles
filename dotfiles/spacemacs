@@ -42,7 +42,9 @@ values."
                                                 ibuffer-group-buffers-by 'projects
                                                 ibuffer-old-time 8)
                                        javascript
-                                       markdown
+                                       (markdown :variables
+												 markdown-live-preview-engine 'vmd)
+                                       nginx
                                        (org :variables
                                             org-todo-keywords (quote ((sequence "TODO" "ONGOING" "DONE")))
                                             org-todo-keyword-faces '(("ONGOING" . "orange")))
