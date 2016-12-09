@@ -1,6 +1,8 @@
 # -*- mode: sh;-*-
 
-export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
+export PROMPT_COMMAND='history -a;PWD_ABBREV=$(~/.bash/abbrev_pwd.rb <<< ${PWD})'
+
+export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\${PWD_ABBREV}\[\033[00m\]\$ "
 export PATH="${HOME}/.cabal/bin:${HOME}/.local/bin:/usr/local/bin:${PATH}"
 export PATH="${HOME}/github/adzerk/cli-tools/micha:${PATH}"
 export PATH="${HOME}/.bash:${PATH}"
@@ -20,7 +22,6 @@ export HISTSIZE=1000000
 export HISTCONTROL=ignoreboth
 export HISTIGNORE='ls:bg:fg:history'
 export HISTTIMEFORMAT='%F %T '
-export PROMPT_COMMAND='history -a'
 
 function gc() { # (user-reponame-str)
   local FROM="git@github.com:${1?}"
