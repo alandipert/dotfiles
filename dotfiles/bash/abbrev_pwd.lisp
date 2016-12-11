@@ -5,8 +5,9 @@
       (elt strs 0)
     (loop with str = (elt strs 0)
           for i from 1 to (1- (length strs))
-          when (elt strs i)
-          do (setq str (concatenate 'string str delim (elt strs i)))
+          for str2 = (elt strs i)
+          when str2
+          do (setq str (concatenate 'string str delim str2))
           finally (return str))))
 
 (defun split-string (str delim-char)
