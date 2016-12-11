@@ -9,11 +9,11 @@
         collect (subseq str (1+ pos0) (or pos1 (length str)))
         while pos1))
 
-(defun abbreviate-path (path)
+(defun abbreviate-butlast (path)
   (destructuring-bind (head . tail) path
     (if tail
         (cons (if (equal "" head) "" (subseq head 0 1))
-              (abbreviate-path tail))
+              (abbreviate-butlast tail))
         (list head))))
 
 (defun abbreviate* (home-str cwd-str)
@@ -22,7 +22,7 @@
          (home-shortened (if (eql 0 (search home-path cwd-path :test #'equalp))
                              (cons "~" (nthcdr (length home-path) cwd-path))
                              cwd-path)))
-    (join-strings (abbreviate-path home-shortened) "/")))
+    (join-strings (abbreviate-butlast home-shortened) "/")))
 
 (defun abbreviate (cwd-str)
   (let* ((home-str (sb-ext:posix-getenv "HOME")))
