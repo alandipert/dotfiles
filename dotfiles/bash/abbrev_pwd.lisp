@@ -1,60 +1,34 @@
 #!/usr/bin/sbcl --script
 
 (defun join-strings (strs delim)
-  (if (eq 1 (length strs))
-      (elt strs 0)
-    (loop with str = (elt strs 0)
-          for i from 1 to (1- (length strs))
-          for str2 = (elt strs i)
-          when str2
-          do (setq str (concatenate 'string str delim str2))
-          finally (return str))))
+  (reduce (lambda (s1 s2) (concatenate 'string s1 delim s2)) strs))
 
 (defun split-string (str delim-char)
-  (let* ((num-delims 2)
-         (delim-idxs (loop with idxs = (list (length str))
-                           for idx from (1- (length str)) downto 0
-                           when (eq (elt str idx) delim-char)
-                           do (setq idxs (cons idx idxs)
-                                    num-delims (1+ num-delims))
-                           finally (return (cons -1 idxs)))))
-    (loop with parts = (make-array (1- num-delims) :fill-pointer 0)
-          for idxs on delim-idxs by #'cdr
-          for (x y) = idxs
-          when y
-          do (vector-push (subseq str (1+ x) y) parts)
-          finally (return parts))))
+  (loop for pos0 = -1 then pos1
+        for pos1 = (position delim-char str :start (1+ pos0))
+        collect (subseq str (1+ pos0) (or pos1 (length str)))
+        while pos1))
 
-(defun common-prefix? (path1 path2)
-  (let* ((shorter (if (< (length path1) (length path2)) path1 path2))
-         (longer  (if (eq path1 shorter) path2 path1)))
-    (equalp (subseq longer 0 (length shorter)) shorter)))
+(defun abbreviate-path (path)
+  (destructuring-bind (head . tail) path
+    (if tail
+        (cons (if (equal "" head) "" (subseq head 0 1))
+              (abbreviate-path tail))
+        (list head))))
 
-(defun add-slashes (path)
-  (if (equal (elt path 0) "~")
-      (join-strings path "/")
-    (join-strings path "/")))
+(defun abbreviate* (home-str cwd-str)
+  (let* ((cwd-path (split-string cwd-str #\/))
+         (home-path (split-string home-str #\/))
+         (home-shortened (if (eql 0 (search home-path cwd-path :test #'equalp))
+                             (cons "~" (nthcdr (length home-path) cwd-path))
+                             cwd-path)))
+    (join-strings (abbreviate-path home-shortened) "/")))
 
-(defun abbreviate-home! (home-path cwd-path)
-  (when (common-prefix? home-path cwd-path)
-    (setf (elt cwd-path 0) "~")
-    (loop for i from 1 to (1- (length home-path))
-          do (setf (elt cwd-path i) nil))))
-
-(defun abbreviate-intermediate! (cwd-path &optional (size 1))
-  (loop for i from 1 to (- (length cwd-path) 2)
-        for item = (elt cwd-path i)
-        when item
-        do (setf (elt cwd-path i) (subseq item 0 size))))
-
-(defun abbreviate (cwd-string)
-  (let* ((cwd (split-string cwd-string #\/))
-         (home-path (split-string (sb-ext:posix-getenv "HOME") #\/)))
-    (cond ((equalp cwd home-path) "~")
-          ((equal cwd-string "/") "/")
-          (t (progn (abbreviate-home! home-path cwd)
-                    (abbreviate-intermediate! cwd)
-                    (add-slashes cwd))))))
+(defun abbreviate (cwd-str)
+  (let* ((home-str (sb-ext:posix-getenv "HOME")))
+    (cond ((equal cwd-str home-str) "~")
+          ((equal cwd-str "/") "/")
+          (t (abbreviate* home-str cwd-str)))))
 
 (loop for cwd = (read-line *standard-input* nil 'end)
       until (eq cwd 'end)
