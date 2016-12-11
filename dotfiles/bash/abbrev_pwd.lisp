@@ -10,11 +10,12 @@
         while pos1))
 
 (defun abbreviate-butlast (path)
-  (destructuring-bind (head . tail) path
-    (if tail
-        (cons (if (equal "" head) "" (subseq head 0 1))
-              (abbreviate-butlast tail))
-        (list head))))
+  (maplist
+   (lambda (part)
+     (if (cdr part)
+         (if (equal "" (car part)) "" (subseq (car part) 0 1))
+         (car part)))
+   path))
 
 (defun abbreviate* (home-str cwd-str)
   (let* ((cwd-path (split-string cwd-str #\/))
