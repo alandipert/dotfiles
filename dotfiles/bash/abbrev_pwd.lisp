@@ -1,8 +1,5 @@
 #!/usr/bin/sbcl --script
 
-(defun join-strings (strs delim)
-  (format nil (concatenate 'string "~{~A~^" delim "~}") strs))
-
 (defun split-string (str delim-char)
   (loop for pos0 = -1 then pos1
         for pos1 = (position delim-char str :start (1+ pos0))
@@ -21,7 +18,7 @@
          (home-shortened (if (eql 0 (search home-path cwd-path :test #'equalp))
                              (cons "~" (nthcdr (length home-path) cwd-path))
                              cwd-path)))
-    (join-strings (abbreviate-butlast home-shortened) "/")))
+    (format nil "~{~A~^/~}" (abbreviate-butlast home-shortened))))
 
 (defun abbreviate (cwd-str)
   (let* ((home-str (sb-ext:posix-getenv "HOME")))
