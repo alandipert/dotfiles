@@ -1,7 +1,7 @@
 #!/usr/bin/sbcl --script
 
 (defun join-strings (strs delim)
-  (reduce (lambda (s1 s2) (concatenate 'string s1 delim s2)) strs))
+  (format nil (concatenate 'string "~{~A~^" delim "~}") strs))
 
 (defun split-string (str delim-char)
   (loop for pos0 = -1 then pos1
@@ -10,12 +10,10 @@
         while pos1))
 
 (defun abbreviate-butlast (path)
-  (maplist
-   (lambda (part)
-     (if (cdr part)
-         (if (equal "" (car part)) "" (subseq (car part) 0 1))
-         (car part)))
-   path))
+  (loop for (item . rest) on path
+        collect (if (and rest (> (length item) 1))
+                    (subseq item 0 1)
+                    item)))
 
 (defun abbreviate* (home-str cwd-str)
   (let* ((cwd-path (split-string cwd-str #\/))
@@ -31,6 +29,6 @@
           ((equal cwd-str "/") "/")
           (t (abbreviate* home-str cwd-str)))))
 
-(loop for cwd = (read-line *standard-input* nil 'end)
-      until (eq cwd 'end)
-      do (princ (format nil "~a~%" (abbreviate cwd))))
+(loop for line = (read-line nil nil nil)
+      while line
+      do (format t "~a~%" (abbreviate line)))
