@@ -427,6 +427,8 @@ you should place your code here."
     ;; Puts the time in the modeline
     (display-time-mode 1)
 
+    (setq inferior-lisp-program "sbcl")
+
     ;; Open .asc/.gpg files with decrypt/encrypt magic
     (require 'epa-file)
     (epa-file-enable)
