@@ -8,7 +8,7 @@ function where() {
   fi
 }
 
-export PROMPT_COMMAND='history -a;USER_HOST=$(where);PWD_ABBREV=$(~/.bash/abbrev_pwd.lisp <<< ${PWD})'
+export PROMPT_COMMAND='history -a;echo -ne "\033]0;bash ${PWD}\007";USER_HOST=$(where);PWD_ABBREV=$(~/.bash/abbrev_pwd.lisp <<< ${PWD})'
 
 export PS1="\[\033[38;5;82m\]\${USER_HOST}\[\033[00m\]\[\033[38;5;200m\]\${PWD_ABBREV}\[\033[38;5;228m\]➜\[\033[00m\] "
 export PATH="${HOME}/.cabal/bin:${HOME}/.local/bin:/usr/local/bin:${PATH}"
