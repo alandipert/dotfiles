@@ -27,7 +27,7 @@ IO.popen(['rofi', '-dmenu',
           '-bg', '#000000',
           '-i',
           '-p',
-          'Jump:'], 'r+') do |dmenu|
+          'jump:'], 'r+') do |dmenu|
     tree = `i3-msg -t get_tree`
     json = get_containers(JSON.load(tree))
     p json
