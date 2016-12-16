@@ -68,6 +68,11 @@ sr () {
   echo Cannot find ssh agent - maybe you should reconnect and forward it?
 }
 
+function source-env() {
+  sed -e 's/\(.*\)/export \1/' "$1"
+  eval $(sed -e 's/\(.*\)/export \1/' "$1")
+}
+
 source "${HOME}/.bash/alias.sh"
 source "${HOME}/.bash/adzerk.sh"
 source "${HOME}/.bash/completion.sh"
