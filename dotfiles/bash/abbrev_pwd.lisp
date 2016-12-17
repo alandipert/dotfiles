@@ -28,4 +28,4 @@
 
 (loop for line = (read-line nil nil nil)
       while line
-      do (format t "~a~%" (abbreviate line)))
+      do (princ (abbreviate line)))
