@@ -19,7 +19,7 @@ void print_abbrev(char *home, char *cwd) {
 
   if(cwd[after_home] == '\0') return;
 
-  cwd_tail = cwd = cwd+after_home+1;
+  cwd += after_home+1;
   while(cwd_tail = strchr(cwd, '/'), cwd_tail != NULL) {
     printf("/%.*s", 1, cwd);
     cwd = cwd_tail+1;
@@ -29,10 +29,8 @@ void print_abbrev(char *home, char *cwd) {
 }
 
 int main(int argc, char **argv) {
-  struct passwd *passwd_ent = getpwuid(getuid());
-  char *home                = passwd_ent->pw_dir;
-  char *cwd                 = getcwd(NULL, 0);
-  print_abbrev(home, cwd);
+  char *cwd = getcwd(NULL, 0);
+  print_abbrev(getpwuid(getuid())->pw_dir, cwd);
   free(cwd);
   return 0;
 }
