@@ -12,7 +12,8 @@ compile() {
 }
 
 shebang() {
-  [[ "$(head -c2 "${1}")" == "#!" ]]
+  read -n2 first2 < "${1}"
+  [[ "${first2}" == "#!" ]]
 }
 
 _mktemp() {
@@ -24,8 +25,8 @@ _mktemp() {
   esac
 }
 
-realpath() {
-    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+_realpath() {
+    [[ $1 = /* ]] && RET="$1" || RET="$PWD/${1#./}"
 }
 
 strip_shebang() {
@@ -34,15 +35,15 @@ strip_shebang() {
     tmp="$(_mktemp).c"
     tail -n+2 "${1}" > $tmp
   fi
-  echo "${tmp}"
+  RET="${tmp}"
 }
 
-SRC_FILE="$(realpath "${1}")"
+_realpath "${1}"; SRC_FILE="${RET}"
 SRC_BASENAME="${SRC_FILE##*/}"
-SRC_NAME="${SRC_BASENAME%.*}"
-STRIPPED_FILE="$(strip_shebang "${SRC_FILE}")"
+SRC_BASENAME_NOEXT="${SRC_BASENAME%.*}"
+strip_shebang "${SRC_FILE}"; STRIPPED_FILE="${RET}"
 
-CACHED_BIN="${MKGO_CACHE}/${SRC_FILE}/${SRC_NAME}"
+CACHED_BIN="${MKGO_CACHE}/${SRC_FILE}/${SRC_BASENAME_NOEXT}"
 
 if [[ !(-f "${CACHED_BIN}") || ("${CACHED_BIN}" -ot "${SRC_FILE}") ]]; then
   rm -rf "${MKGO_CACHE}/${SRC_FILE}"
@@ -50,4 +51,4 @@ if [[ !(-f "${CACHED_BIN}") || ("${CACHED_BIN}" -ot "${SRC_FILE}") ]]; then
   compile "${STRIPPED_FILE}" "${CACHED_BIN}"
 fi
 
-shift && exec -a "${SRC_NAME}" "${CACHED_BIN}" "$@"
+shift && exec -a "${SRC_BASENAME_NOEXT}" "${CACHED_BIN}" "$@"
