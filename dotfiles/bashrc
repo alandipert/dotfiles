@@ -9,7 +9,7 @@ function where() {
 }
 
 if (type sbcl >/dev/null 2>&1); then
-  export PROMPT_COMMAND='history -a;echo -ne "\033]0;bash ${PWD}\007";USER_HOST=$(where);PWD_ABBREV=$(~/.bash/abbrev_pwd.lisp <<< ${PWD})'
+  export PROMPT_COMMAND='history -a;echo -ne "\033]0;bash ${PWD}\007";USER_HOST=$(where);PWD_ABBREV=$(mkgo ~/.bash/abbrev_pwd.c <<< ${PWD})'
 else
   export PROMPT_COMMAND='history -a;echo -ne "\033]0;bash ${PWD}\007";USER_HOST=$(where);PWD_ABBREV=${PWD/#$HOME/\~}'
 fi
