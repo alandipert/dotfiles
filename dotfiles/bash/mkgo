@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+set -e
+if [[ "$#" -lt 1 ]] || ! [[ -e "$1" ]]; then
+  (>&2 echo "Usage: $0 file arg...")
+  exit 1
+fi
+
+MKGO_CACHE="${MKGO_CACHE:=${HOME}/.mkgo/cache}" && mkdir -p "${MKGO_CACHE}"
+
+md5() {
+  echo $(md5sum "$1" | { read x _; echo $x; })
+}
+
+compile() {
+  cc "$1" -o "$2"
+}
+
+shebang() {
+  [[ "$(head -1 "${1}")" =~ ^\#! ]]
+}
+
+_mktemp() {
+  case $(uname -s) in
+    Darwin) mktemp -t temp ;;
+    Linux) mktemp ;;
+    *) (>&2 echo "Unknown system '$(uname -s)', don't now how to _mktemp");
+       exit 1 ;;
+  esac
+}
+
+strip_shebang() {
+  local tmp="${1}"
+  if shebang "${1}"; then
+    tmp="$(_mktemp).c"
+    tail -n+2 "${1}" > $tmp
+  fi
+  echo "${tmp}"
+}
+
+SRC_FILE="$(readlink -f "${1}")"
+SRC_MD5=$(md5 "$SRC_FILE")
+SRC_NAME="${SRC_FILE%%.*}"
+STRIPPED_FILE="$(strip_shebang "${SRC_FILE}")"
+
+CACHED_BIN="${MKGO_CACHE}/${SRC_FILE}/${SRC_MD5}"
+
+if ! [[ -f "${CACHED_BIN}" ]]; then
+  rm -rf "${MKGO_CACHE}/${SRC_FILE}"
+  mkdir -p "${MKGO_CACHE}/${SRC_FILE}"
+  compile "${STRIPPED_FILE}" "${CACHED_BIN}"
+fi
+
+shift && exec -a "${SRC_NAME}" "${CACHED_BIN}" "$@"
