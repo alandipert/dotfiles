@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
+
 set -e
+
 if [[ "$#" -lt 1 ]] || ! [[ -e "$1" ]]; then
   (>&2 echo "Usage: $0 file arg...")
   exit 1
@@ -26,7 +28,7 @@ _mktemp() {
 }
 
 _realpath() {
-    [[ $1 = /* ]] && RET="$1" || RET="$PWD/${1#./}"
+  [[ $1 = /* ]] && RET="$1" || RET="$PWD/${1#./}"
 }
 
 strip_shebang() {
