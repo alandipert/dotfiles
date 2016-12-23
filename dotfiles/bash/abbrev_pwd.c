@@ -7,7 +7,9 @@
 /* If prefix is found at beginning of str, return length of prefix. */
 int startswith(char *str, char *prefix) {
   for(int i = 0;; i++) {
-    if(str[i] == '\0' || prefix[i] == '\0') {
+    if(str[i] == '\0' && prefix[i] != '\0') {
+      return 0;
+    } else if(prefix[i] == '\0') {
       return i;
     } else if(str[i] != prefix[i]) {
       return 0;
