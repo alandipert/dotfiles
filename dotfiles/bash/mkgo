@@ -24,6 +24,10 @@ _mktemp() {
   esac
 }
 
+realpath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
 strip_shebang() {
   local tmp="${1}"
   if shebang "${1}"; then
@@ -33,7 +37,7 @@ strip_shebang() {
   echo "${tmp}"
 }
 
-SRC_FILE="$(readlink -f "${1}")"
+SRC_FILE="$(realpath "${1}")"
 SRC_BASENAME="${SRC_FILE##*/}"
 SRC_NAME="${SRC_BASENAME%.*}"
 STRIPPED_FILE="$(strip_shebang "${SRC_FILE}")"
