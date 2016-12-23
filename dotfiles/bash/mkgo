@@ -7,16 +7,12 @@ fi
 
 MKGO_CACHE="${MKGO_CACHE:=${HOME}/.mkgo/cache}" && mkdir -p "${MKGO_CACHE}"
 
-md5() {
-  echo $(md5sum "$1" | { read x _; echo $x; })
-}
-
 compile() {
   cc "$1" -o "$2"
 }
 
 shebang() {
-  [[ "$(head -1 "${1}")" =~ ^\#! ]]
+  [[ "$(head -c2 "${1}")" == "#!" ]]
 }
 
 _mktemp() {
@@ -38,13 +34,13 @@ strip_shebang() {
 }
 
 SRC_FILE="$(readlink -f "${1}")"
-SRC_MD5=$(md5 "$SRC_FILE")
-SRC_NAME="${SRC_FILE%%.*}"
+SRC_BASENAME="${SRC_FILE##*/}"
+SRC_NAME="${SRC_BASENAME%.*}"
 STRIPPED_FILE="$(strip_shebang "${SRC_FILE}")"
 
-CACHED_BIN="${MKGO_CACHE}/${SRC_FILE}/${SRC_MD5}"
+CACHED_BIN="${MKGO_CACHE}/${SRC_FILE}/${SRC_NAME}"
 
-if ! [[ -f "${CACHED_BIN}" ]]; then
+if [[ !(-f "${CACHED_BIN}") || ("${CACHED_BIN}" -ot "${SRC_FILE}") ]]; then
   rm -rf "${MKGO_CACHE}/${SRC_FILE}"
   mkdir -p "${MKGO_CACHE}/${SRC_FILE}"
   compile "${STRIPPED_FILE}" "${CACHED_BIN}"
