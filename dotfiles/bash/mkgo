@@ -28,7 +28,7 @@ _mktemp() {
 }
 
 _realpath() {
-  [[ $1 = /* ]] && RET="$1" || RET="$PWD/${1#./}"
+  [[ "${1}" = /* ]] && RET="${1}" || RET="${PWD}/${1#./}"
 }
 
 strip_shebang() {
