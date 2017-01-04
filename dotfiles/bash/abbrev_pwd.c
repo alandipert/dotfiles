@@ -5,7 +5,8 @@
 #include <unistd.h>
 
 int startswith(char *str, char *prefix) {
-  for(int i = 0;;i++) {
+  int i;
+  for(i = 0;;i++) {
     if(prefix[i] == '\0') return i;
     if(str[i] == '\0' || (str[i] != prefix[i])) return 0;
   }
