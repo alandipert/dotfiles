@@ -179,7 +179,7 @@ bindsym $mod+p mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
-        tray_output primary
+        #tray_output primary
         colors {
           focused_workspace  #adff2f #000000 #ffffff
         }
@@ -219,6 +219,9 @@ bindsym --release $mod+Print exec ~/.i3/snap.sh
 # Focus-last
 bindsym $mod+Tab exec ~/.i3/focus-last.py --switch
 exec_always --no-startup-id ~/.i3/focus-last.py
+
+# Dropbox
+exec_always dbus-launch dropbox start
 
 # Set background color
 exec --no-startup-id xsetroot -solid "#333333"
