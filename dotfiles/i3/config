@@ -221,7 +221,7 @@ bindsym $mod+Tab exec ~/.i3/focus-last.py --switch
 exec_always --no-startup-id ~/.i3/focus-last.py
 
 # Dropbox
-exec_always dbus-launch dropbox start
+exec_always --no-startup-id dbus-launch dropbox start
 
 # Set background color
 exec --no-startup-id xsetroot -solid "#333333"
@@ -229,7 +229,7 @@ exec --no-startup-id xsetroot -solid "#333333"
 # Unity/applet stuff (16.04)
 bindsym $mod+Control+comma exec ~/.i3/ucc
 exec --no-startup-id unity-settings-daemon
-exec --no-startup-id nm-applet
+exec_always --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 
 # volume control keys
@@ -238,7 +238,7 @@ bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 5- unmute"
 bindsym XF86AudioMute exec "amixer -q -D pulse sset Master toggle"
 
 # Dropbox
-exec /usr/bin/dropbox start
+exec_always --no-startup-id /usr/bin/dropbox start
 
 # AutoKey
-exec /usr/bin/autokey-gtk
+exec --no-startup-id /usr/bin/autokey-gtk
