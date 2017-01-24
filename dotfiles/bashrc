@@ -1,8 +1,13 @@
 # -*- mode: sh;-*-
 
 function where() {
-  if [ $USER == "alan" -a $(uname -n) == "gazebo" ]; then
-    echo;
+  local HOSTNAME="$(uname -n)"
+  if [ $USER == "alan" ]; then
+    case "$HOSTNAME" in
+      gazebo) ;&
+      dorito) echo; ;;
+      *) echo "${USER}@${HOSTNAME}:" ;;
+    esac
   else
     echo "${USER}@$(uname -n):"
   fi
