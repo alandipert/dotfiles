@@ -220,6 +220,9 @@ bindsym --release $mod+Print exec ~/.i3/snap.sh
 bindsym $mod+Tab exec ~/.i3/focus-last.py --switch
 exec_always --no-startup-id ~/.i3/focus-last.py
 
+# Fake gnome-panel to fix media keys
+exec_always --no-startup-id ~/.i3/fake-panel.py
+
 # Dropbox
 exec_always --no-startup-id dbus-launch dropbox start
 
