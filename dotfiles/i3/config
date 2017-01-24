@@ -216,6 +216,10 @@ bindsym $mod+m mode "move"
 # Screenshot to Dropbox script
 bindsym --release $mod+Print exec ~/.i3/snap.sh
 
+# python stuff - need to:
+# sudo apt install python3-pip
+# sudo pip3 install i3ipc
+
 # Focus-last
 bindsym $mod+Tab exec ~/.i3/focus-last.py --switch
 exec_always --no-startup-id ~/.i3/focus-last.py
