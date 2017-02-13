@@ -1,5 +1,7 @@
-adzerk_env() {
-  eval "$(gpg -d $HOME/Dropbox/dotfiles/.adzerk.asc)"
+GPG_TTY=$(tty)
+export GPG_TTY
+aenv() {
+  eval "$(gpg2 --use-agent -d $HOME/Dropbox/dotfiles/.adzerk.asc)"
 }
 
 

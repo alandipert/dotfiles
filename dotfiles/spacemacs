@@ -346,6 +346,9 @@ you should place your code here."
           sgml-basic-offset 2
           web-mode-markup-indent-offset 2)
 
+    ;; Follow symbolic links automatically
+    (setq vc-follow-symlinks t)
+
     (add-hook 'sml-mode-hook
               (lambda ()
                 (setq sml-indent-level 2
@@ -414,8 +417,8 @@ you should place your code here."
 							(make-glyph-code ?┃))
 
     ;; Increase and decrease font size globally with SPC o f +/-
-    (evil-leader/set-key "of+" 'alandipert/increase-font-size)
-    (evil-leader/set-key "of-" 'alandipert/decrease-font-size)
+    (evil-leader/set-key "o+" 'alandipert/increase-font-size)
+    (evil-leader/set-key "o-" 'alandipert/decrease-font-size)
     (evil-leader/set-key "or" 'redraw-display)
     (evil-leader/set-key "ot" 'alandipert/fix-frame)
 

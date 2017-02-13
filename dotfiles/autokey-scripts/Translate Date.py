@@ -8,7 +8,7 @@ if ":" not in s:
 p = datetime.strptime(s.replace(" ", "").upper(), "%I:%M%p")
 e = p + timedelta(hours=3)
 
-def fmt(d):
+def fmt(d):d
     return d.strftime("%-I:%M %p")
 
 def formatDates(t1, t2):
