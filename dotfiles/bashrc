@@ -70,7 +70,7 @@ sr () {
 }
 
 trying() {
-  while true; do $1; sleep 5; done
+  while true; do $@; sleep 5; done
 }
 
 function source-env() {
