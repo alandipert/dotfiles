@@ -50,6 +50,9 @@ bindsym $mod+d exec ~/.i3/rofi.sh -show run -hlfg '#000000' -hlbg '#adff2f' -fg 
 # start dmenu with window list
 bindsym $mod+Shift+d exec ~/.i3/window-jump
 
+# jump to active slack window
+bindsym $mod+c exec exec ~/.i3/slack-jump
+
 # emacs
 bindsym $mod+period exec ~/.bash/e
 
