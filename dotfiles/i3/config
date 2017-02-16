@@ -224,6 +224,9 @@ bindsym --release $mod+Print exec ~/.i3/snap.sh
 bindsym $mod+Tab exec ~/.i3/focus-last.py --switch
 exec_always --no-startup-id ~/.i3/focus-last.py
 
+# External monitor brightness
+bindsym $mod+B exec ~/.i3/brightness.sh
+
 # Fake gnome-panel to fix media keys
 exec_always --no-startup-id ~/.i3/fake-panel.py
 
