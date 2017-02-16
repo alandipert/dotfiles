@@ -1,18 +1,17 @@
 #!/usr/bin/env ruby
 require 'json'
 
-# https://faq.i3wm.org/question/1281/application-switcher/?answer=3786#post-id-3786
 # Jump to the first recent slack message window
+# https://faq.i3wm.org/question/1281/application-switcher/?answer=3786#post-id-3786
 
 # recursively walk tree to find all containers
-# return an array of names followed by [id]
 def get_containers tree
     containers = []
     #puts JSON.pretty_generate(tree)
     # try to return only useful containers
     if (tree['nodes']+tree['floating_nodes']).empty? && tree['type'] == 'con' &&
         !(tree['name'] =~ /^i3bar for output/)
-        containers << tree['name'] + " [#{tree['id']}]"
+        containers << tree
     end
     (tree['nodes'] + tree['floating_nodes']).each do |node|
         containers += get_containers(node)
@@ -22,8 +21,7 @@ end
 
 tree = `i3-msg -t get_tree`
 json = get_containers(JSON.load(tree))
-chat_window = json.select{|s| s[/!.*Slack.*/]}.first
+chat_window = json.select{|s| s['name'][/!.*Slack.*/]}.first
 if chat_window
-  id = chat_window.split(/\[(\d+)\]/)[1]
-  exec "i3-msg [con_id=#{id}] focus"
+  exec "i3-msg [con_id=#{chat_window['id']}] focus"
 end
