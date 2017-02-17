@@ -231,6 +231,9 @@ exec_always --no-startup-id ~/.i3/focus-last.py
 bindsym $mod+Shift+b exec ~/.i3/brightness.sh up
 bindsym $mod+b exec ~/.i3/brightness.sh down
 
+# Move cursor to center of focused window
+bindsym $mod+comma exec ~/.i3/center_cursor_focused_window.sh
+
 # Fake gnome-panel to fix media keys
 exec_always --no-startup-id ~/.i3/fake-panel.py
 
