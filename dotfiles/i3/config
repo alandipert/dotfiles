@@ -249,8 +249,11 @@ exec --no-startup-id unity-settings-daemon
 exec_always --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 
-# Dropbox
+# Keynav
 exec_always --no-startup-id /usr/bin/dropbox start
+
+# Dropbox
+exec_always --no-startup-id /usr/bin/keynav
 
 # AutoKey
 exec --no-startup-id /usr/bin/autokey-gtk
