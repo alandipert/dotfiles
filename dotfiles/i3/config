@@ -62,6 +62,9 @@ bindsym $mod+Control+period exec /usr/bin/google-chrome
 # calc
 bindsym $mod+Shift+plus exec gnome-calculator
 
+# Make floating window sticky
+bindsym $mod+Shift+s sticky toggle
+
 # change focus
 bindsym $mod+n focus left
 bindsym $mod+e focus down
