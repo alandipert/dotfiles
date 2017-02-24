@@ -153,7 +153,7 @@ bindsym $mod+Shift+P restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+F exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+S exec "i3-nagbar -t warning -m 'You pressed the suspend shortcut. Do you really want to suspend?' -b 'Yes, suspend' 'killall i3-nagbar && sudo pm-suspend'"
+#bindsym $mod+Shift+S exec "i3-nagbar -t warning -m 'You pressed the suspend shortcut. Do you really want to suspend?' -b 'Yes, suspend' 'killall i3-nagbar && sudo pm-suspend'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -260,3 +260,8 @@ exec_always --no-startup-id /usr/bin/keynav
 
 # AutoKey
 exec --no-startup-id /usr/bin/autokey-gtk
+
+# Auto workspaces
+for_window [title=".*Slack - Google Chrome.*"] move to workspace 1
+for_window [title=".*Mail - Google Chrome.*"] move to workspace 1
+for_window [class="zoom"] move to workspace 2
