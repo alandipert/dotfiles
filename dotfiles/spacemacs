@@ -337,11 +337,7 @@ you should place your code here."
       (write-region nil nil "~/.custom.el"))
     (load custom-file)
 
-    ;; dir-local variables to trust
-    (dolist (var '((use-inf-clojure-program . #'stringp)
-                   (inf-clojure-buffer . #'stringp)
-                   (use-inf-clojure . #'symbolp)))
-      (put (car var) 'safe-local-variable (cdr var)))
+    (setq enable-local-variables :safe)
 
     ;; Favorite indents for various modes.
     (setq c-basic-offset 2
