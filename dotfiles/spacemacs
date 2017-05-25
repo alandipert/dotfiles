@@ -35,6 +35,7 @@ values."
                                        csv
                                        docker
                                        emacs-lisp
+                                       ess
                                        git
                                        github
                                        helm
