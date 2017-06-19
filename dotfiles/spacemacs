@@ -351,6 +351,9 @@ you should place your code here."
     ;; Follow symbolic links automatically
     (setq vc-follow-symlinks t)
 
+
+    (setq org-enforce-todo-dependencies t)
+    
     (add-hook 'sml-mode-hook
               (lambda ()
                 (setq sml-indent-level 2
@@ -422,7 +425,7 @@ you should place your code here."
     (evil-leader/set-key "o+" 'alandipert/increase-font-size)
     (evil-leader/set-key "o-" 'alandipert/decrease-font-size)
     (evil-leader/set-key "or" 'redraw-display)
-    (evil-leader/set-key "ot" 'alandipert/fix-frame)
+    (evil-leader/set-key "ot" 'org-todo)
 
     ;; jump shortcut
     (evil-leader/set-key "oo" 'evil-avy-goto-line)
