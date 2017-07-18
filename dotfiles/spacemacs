@@ -29,7 +29,7 @@ values."
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
-   dotspacemacs-configuration-layers '(auto-completion
+   dotspacemacs-configuration-layers '(vimscriptauto-completion
                                        clojure
                                        common-lisp
                                        csv
