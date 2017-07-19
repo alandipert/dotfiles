@@ -3,11 +3,13 @@ set hintchars=arstoien
 
 set defsearch=duckduckgo
 
-" disable bell
-javascript liberator.beep = function() { return false; }
+" no error bells
+set noerrorbells
 
 " whitelisted sites
 autocmd LocationChange www.nytimes.com/crosswords/game/mini js modes.passAllKeys = true
+autocmd LocationChange mail\\.google\\.com js modes.passAllKeys = true
+autocmd LocationChange calendar\\.google\\.com js modes.passAllKeys = true
 
 " appear.in helper
 command! -nargs=1 appear tabopen https://appear.in/<args>
