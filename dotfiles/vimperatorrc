@@ -15,7 +15,7 @@ autocmd LocationChange calendar\\.google\\.com js modes.passAllKeys = true
 command! -nargs=1 appear tabopen https://appear.in/<args>
 
 " time to wait before following a non-unique hint
-set hinttimeout = 500
+set hinttimeout=500
 
 " custom hint, theme styles
 hi Hint font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:12px;border:1px solid rgb(227,190,35);border-radius:3px;padding:1px 3px 0px;box-shadow:rgba(0,0,0,0.3) 0px 3px 7px 0px;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(255,247,133)),to(rgb(255,197,66)));font-weight:bold;text-transform:uppercase;
