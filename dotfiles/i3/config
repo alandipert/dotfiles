@@ -265,3 +265,7 @@ exec --no-startup-id /usr/bin/autokey-gtk
 for_window [title=".*Slack - Google Chrome.*"] move to workspace 1
 for_window [title=".*Mail - Google Chrome.*"] move to workspace 1
 for_window [class="zoom"] move to workspace 2
+
+# Make caps lock control, make momentary control escape
+setxkbmap -option ctrl:nocaps
+xcape -e 'Control_L=Escape'
