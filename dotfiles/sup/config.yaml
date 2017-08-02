@@ -7,10 +7,6 @@
     :sendmail: "msmtp -a personal -t --read-envelope-from"
     :signature: "/home/alan/.signature"
     :gpgkey: ''
-  :adzerk:
-    :name: Alan Dipert
-    :email: adipert@adzerk.com
-    :sendmail: "msmtp -a adzerk -t --read-envelope-from"
 :editor: vi
 :thread_by_subject: false
 :edit_signature: false

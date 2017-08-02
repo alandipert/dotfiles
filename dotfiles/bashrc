@@ -9,8 +9,6 @@ export PROMPT_COMMAND='history -a;echo -ne "\033]0;bash ${PWD}\007";USER_HOST=$(
 
 export PS1="\[\033[38;5;82m\]\${USER_HOST}\[\033[00m\]\[\033[38;5;200m\]\${PWD_ABBREV}\[\033[38;5;228m\]➜\[\033[00m\] "
 export PATH="${HOME}/.cabal/bin:${HOME}/.local/bin:/usr/local/bin:${PATH}"
-export PATH="${HOME}/github/adzerk/cli-tools/micha:${PATH}"
-export PATH="${HOME}/github/adzerk/cli-tools/alan:${PATH}"
 export PATH="${HOME}/.bash:${PATH}"
 export TERM=xterm-256color
 export EDITOR=vi
@@ -71,17 +69,23 @@ trying() {
 }
 
 function source-env() {
-  sed -e 's/\(.*\)/export \1/' "$1"
-  eval $(sed -e 's/\(.*\)/export \1/' "$1")
+  # Unset AWS vars
+  unset $(env | grep ^AWS | sed -e 's$\(AWS_.*\)=.*$\1$' | paste -s -d' ' -)
+  # Remove all env-specific functions
+  unset $(typeset -F \
+              |cut -d' ' -f3\
+              |egrep -i $(find $HOME/.bash/envs -type f -name '*.sh.gpg' -exec basename {} ';'\
+                              |while read f; do echo ^${f%.sh.gpg}_; done\
+                              |paste -s -d'|' -)\
+              |paste -s -d' ' -)
+  source <(GPG_TTY=$(tty) gpg2 --use-agent -d $HOME/.bash/envs/$1.sh.gpg)
 }
 
 source "${HOME}/.bash/alias.sh"
-source "${HOME}/.bash/adzerk.sh"
 source "${HOME}/.bash/completion.sh"
 
 [[ -e "${HOME}/.localrc" ]] && source "${HOME}/.localrc"
 
-ssh-add ~/.ssh/adzerk.pem &>/dev/null
 ssh-add ~/.ssh/id_rsa &>/dev/null
 
 export NVM_DIR="/home/alan/.nvm"
