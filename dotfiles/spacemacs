@@ -333,9 +333,8 @@ you should place your code here."
 
     ;; Put customizations in ~/.custom.el, creating it if necessary.
     (setq custom-file "~/.custom.el")
-    (when (not (file-exists-p "~/.custom.el"))
-      (write-region nil nil "~/.custom.el"))
-    (load custom-file)
+    (when (file-exists-p "~/.custom.el")
+      (load custom-file))
 
     (setq enable-local-variables :safe)
 
@@ -351,9 +350,11 @@ you should place your code here."
     ;; Follow symbolic links automatically
     (setq vc-follow-symlinks t)
 
+    ;; org/achiever stuff
+    (load-file "~/Dropbox/snippets/achiever.el")
 
     (setq org-enforce-todo-dependencies t)
-    
+
     (add-hook 'sml-mode-hook
               (lambda ()
                 (setq sml-indent-level 2
@@ -426,6 +427,7 @@ you should place your code here."
     (evil-leader/set-key "o-" 'alandipert/decrease-font-size)
     (evil-leader/set-key "or" 'redraw-display)
     (evil-leader/set-key "ot" 'org-todo)
+    (evil-leader/set-key "oa" 'achiever-achieve)
 
     ;; jump shortcut
     (evil-leader/set-key "oo" 'evil-avy-goto-line)
@@ -442,7 +444,8 @@ you should place your code here."
     (require 'epa-file)
     (epa-file-enable)
     (setq epa-file-name-regexp "\\.\\(gpg\\|asc\\)$"
-          epa-armor t)
+          epa-armor t
+          epa-pinentry-mode 'loopbac)
     (epa-file-name-regexp-update)
 
     ;; indent guide is awesome, turn it on all the time
