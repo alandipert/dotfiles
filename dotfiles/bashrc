@@ -78,7 +78,7 @@ function source-env() {
                               |while read f; do echo ^${f%.sh.gpg}_; done\
                               |paste -s -d'|' -)\
               |paste -s -d' ' -)
-  source <(GPG_TTY=$(tty) gpg2 --use-agent -d $HOME/.bash/envs/$1.sh.gpg)
+  source <(GPG_TTY=$(tty) gpg --use-agent -d $HOME/.bash/envs/$1.sh.gpg)
 }
 
 source "${HOME}/.bash/alias.sh"
