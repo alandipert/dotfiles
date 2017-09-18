@@ -240,9 +240,6 @@ bindsym $mod+comma exec ~/.i3/center_cursor_focused_window.sh
 # Fake gnome-panel to fix media keys
 exec_always --no-startup-id ~/.i3/fake-panel.py
 
-# Dropbox
-exec_always --no-startup-id dbus-launch dropbox start
-
 # Set background color
 exec --no-startup-id xsetroot -solid "#333333"
 
@@ -252,14 +249,8 @@ exec --no-startup-id unity-settings-daemon
 exec_always --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 
-# Keynav
-exec_always --no-startup-id /usr/bin/dropbox start
-
 # Dropbox
-exec_always --no-startup-id /usr/bin/keynav
-
-# AutoKey
-exec --no-startup-id /usr/bin/autokey-gtk
+exec_always --no-startup-id /usr/bin/dropbox start
 
 # Auto workspaces
 for_window [title=".*Slack - Google Chrome.*"] move to workspace 1
@@ -267,5 +258,5 @@ for_window [title=".*Mail - Google Chrome.*"] move to workspace 1
 for_window [class="zoom"] move to workspace 2
 
 # Make caps lock control, make momentary control escape
-setxkbmap -option ctrl:nocaps
-xcape -e 'Control_L=Escape'
+exec_always setxkbmap -option ctrl:nocaps
+exec_always xcape -e 'Control_L=Escape'
