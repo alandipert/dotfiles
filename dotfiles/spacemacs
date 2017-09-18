@@ -3,8 +3,7 @@
 ;; It must be stored in your home directory.
 
 (defun dotspacemacs/layers ()
-  "Configuration Layers declaration.
-You should not put any user code in this function besides modifying the variable
+  "Configuration Layers declaration. You should not put any user code in this function besides modifying the variable
 values."
   (setq-default
    ;; Base distribution to use. This is a layer contained in the directory
@@ -29,13 +28,11 @@ values."
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
-   dotspacemacs-configuration-layers '(vimscriptauto-completion
-                                       clojure
+   dotspacemacs-configuration-layers '(clojure
                                        common-lisp
                                        csv
                                        docker
                                        emacs-lisp
-                                       ess
                                        git
                                        github
                                        helm
@@ -44,9 +41,11 @@ values."
                                                 ibuffer-group-buffers-by 'projects
                                                 ibuffer-old-time 8)
                                        javascript
+                                       lua
                                        (markdown :variables
-												 markdown-live-preview-engine 'vmd)
+                                                 markdown-live-preview-engine 'vmd)
                                        nginx
+                                       ocaml
                                        (org :variables
                                             org-todo-keywords (quote ((sequence "TODO" "ONGOING" "DONE")))
                                             org-todo-keyword-faces '(("ONGOING" . "orange")))
@@ -55,13 +54,12 @@ values."
                                        sml
                                        spell-checking
                                        sql
-                                       syntax-checking
-                                       themes-megapack)
+                                       syntax-checking)
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(groovy-mode)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -133,7 +131,7 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(monokai phoenix-dark-mono spacemacs-light)
+   dotspacemacs-themes '(spacemacs-dark spacemacs-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -253,7 +251,7 @@ values."
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -284,7 +282,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup nil
+   dotspacemacs-whitespace-cleanup 'changed
    ))
 
 (defun dotspacemacs/user-init ()
@@ -320,6 +318,33 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (spacemacs/toggle-fullscreen-frame-on)
   (spacemacs/toggle-fullscreen-frame-off))
 
+(defun alandipert/toggle-semicolon ()
+  "Toggles existence of a semicolon at the end of the current line."
+  (interactive)
+  (save-excursion
+    (end-of-line)
+    (let* ((last-char (byte-to-string (char-after (1- (point))))))
+      (if (string-equal ";" last-char)
+          (progn (goto-char (1- (point)))
+                 (delete-char 1))
+        (insert ";")))))
+
+
+(defvar-local *last-quit-attempt* nil)
+
+(defun alandipert/maybe-quit ()
+  "Needs to be called twice within 1 second in order to quit
+emacs. Meant to be bound to s-q (command-q) on macOS."
+  (interactive)
+  (let* ((timeout-sec 1)
+         (now (elt (current-time) 1)))
+    (cond ((null *last-quit-attempt*)
+           (setq *last-quit-attempt* now))
+          ((>= (- now *last-quit-attempt*) timeout-sec)
+           (progn (setq *last-quit-attempt* nil)
+                  (message "Not quitting -- timed out")))
+          (t (kill-emacs)))))
+
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
@@ -327,15 +352,14 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-(let* ((extensions! (lambda (mode exts)
+  (let* ((extensions! (lambda (mode exts)
                         (dolist (ext exts)
                           (add-to-list 'auto-mode-alist (cons ext mode))))))
 
     ;; Put customizations in ~/.custom.el, creating it if necessary.
     (setq custom-file "~/.custom.el")
-    (when (not (file-exists-p "~/.custom.el"))
-      (write-region nil nil "~/.custom.el"))
-    (load custom-file)
+    (when (file-exists-p "~/.custom.el")
+      (load custom-file))
 
     (setq enable-local-variables :safe)
 
@@ -351,9 +375,11 @@ you should place your code here."
     ;; Follow symbolic links automatically
     (setq vc-follow-symlinks t)
 
+    ;; org/achiever stuff
+    (load-file "~/Dropbox/snippets/achiever.el")
 
     (setq org-enforce-todo-dependencies t)
-    
+
     (add-hook 'sml-mode-hook
               (lambda ()
                 (setq sml-indent-level 2
@@ -405,36 +431,40 @@ you should place your code here."
     (with-eval-after-load 'sml-mode
       (prettify-symbols-mode))
 
-    (evil-leader/set-key "ol"  'evil-lisp-state)
-    ;; Don't automatically enter lisp-state after invoking a lisp state command
-    ;; (setq evil-lisp-state-enter-lisp-state-on-command nil)
-
     ;; Make the line number gutter look cool
     (setq linum-format "%4d \u2502")
 
-	;; Reverse colors for the border to have nicer line
-	(set-face-inverse-video-p 'vertical-border nil)
-	(set-face-background 'vertical-border (face-background 'default))
+    ;; Reverse colors for the border to have nicer line
+    (set-face-inverse-video-p 'vertical-border nil)
+    (set-face-background 'vertical-border (face-background 'default))
 
-	;; Set symbol for the border
-	(set-display-table-slot standard-display-table
-							'vertical-border
-							(make-glyph-code ?┃))
+    ;; Set symbol for the border
+    (set-display-table-slot standard-display-table
+                            'vertical-border
+                            (make-glyph-code ?┃))
 
     ;; Increase and decrease font size globally with SPC o f +/-
     (evil-leader/set-key "o+" 'alandipert/increase-font-size)
     (evil-leader/set-key "o-" 'alandipert/decrease-font-size)
     (evil-leader/set-key "or" 'redraw-display)
     (evil-leader/set-key "ot" 'org-todo)
+    (evil-leader/set-key "oa" 'achiever-achieve)
+    (evil-leader/set-key "ol"  'evil-lisp-state)
+    (evil-leader/set-key "o;" 'alandipert/toggle-semicolon)
 
-    ;; jump shortcut
+    ;; On Macs, Command-q should only kill emacs if it's pressed twice within a
+    ;; second.
+    (when (eq system-type 'darwin)
+      (global-set-key (kbd "s-q") 'alandipert/maybe-quit))
+
+    ;; Don't automatically enter lisp-state after invoking a lisp state command
+    ;; (setq evil-lisp-state-enter-lisp-state-on-command nil)
+
+    ;; Jump shortcut
     (evil-leader/set-key "oo" 'evil-avy-goto-line)
 
     (when (eq window-system 'x)
       (alandipert/fix-frame))
-
-    ;; Puts the time in the modeline
-    (display-time-mode 1)
 
     (setq inferior-lisp-program "sbcl")
 
@@ -442,20 +472,9 @@ you should place your code here."
     (require 'epa-file)
     (epa-file-enable)
     (setq epa-file-name-regexp "\\.\\(gpg\\|asc\\)$"
-          epa-armor t)
+          epa-armor t
+          epa-pinentry-mode 'loopback)
     (epa-file-name-regexp-update)
 
-    ;; indent guide is awesome, turn it on all the time
-    (spacemacs/toggle-indent-guide-globally-on)
-    (setq indent-guide-recursive t)
-
-    ;; set frame titles to include word emacs for easier searching
-    (setq frame-title-format "emacs [%b]")
-
-    (defadvice isearch-search (after isearch-no-fail activate)
-      (unless isearch-success
-        (ad-disable-advice 'isearch-search 'after 'isearch-no-fail)
-        (ad-activate 'isearch-search)
-        (isearch-repeat (if isearch-forward 'forward))
-        (ad-enable-advice 'isearch-search 'after 'isearch-no-fail)
-        (ad-activate 'isearch-search)))))
+    ;; Set frame titles to include word emacs for easier searching
+    (setq frame-title-format "emacs [%b]")))
