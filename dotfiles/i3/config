@@ -257,8 +257,8 @@ for_window [title=".*Mail - Google Chrome.*"] move to workspace 1
 for_window [class="zoom"] move to workspace 2
 
 # Make caps lock control, make momentary control escape
-exec_always setxkbmap -option ctrl:nocaps
-exec_always xcape -e 'Control_L=Escape'
+exec setxkbmap -option ctrl:nocaps
+exec_always /usr/bin/xcape -e 'Control_L=Escape'
 
 # https://faq.i3wm.org/question/3747/enabling-multimedia-keys.1.html
 
