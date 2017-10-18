@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 source ~/.bashrc
-emacsclient --no-wait "$@"
+if [[ $(uname -s) == "Darwin" ]]; then
+  emacsclient --no-wait "$@"
+else  
+  emacsclient --no-wait -s ~/.emacs.d/server/server* "$@"
+fi
