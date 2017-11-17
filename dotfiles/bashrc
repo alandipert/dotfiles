@@ -10,8 +10,7 @@ export PROMPT_COMMAND='history -a;echo -ne "\033]0;bash ${PWD}\007";USER_HOST=$(
 export PS1="\[\033[38;5;82m\]\${USER_HOST}\[\033[00m\]\[\033[38;5;200m\]\${PWD_ABBREV}\[\033[38;5;228m\]➜\[\033[00m\] "
 export PATH="${HOME}/.cabal/bin:${HOME}/.local/bin:/usr/local/bin:${PATH}"
 export PATH="${HOME}/.bash:${PATH}"
-export TERM=xterm-256color
-export EDITOR=vi
+export EDITOR=vis
 
 mkdir -p $HOME/gocode
 export GOPATH=$HOME/gocode
@@ -26,6 +25,9 @@ export HISTSIZE=1000000
 export HISTCONTROL=ignoreboth
 export HISTIGNORE='ls:bg:fg:history'
 export HISTTIMEFORMAT='%F %T '
+
+# Searching in vis
+export FZF_DEFAULT_COMMAND='(git ls-files -co --exclude-standard || rg --files) 2> /dev/null'
 
 function gc() { # (user-reponame-str)
   local FROM="git@github.com:${1?}"
