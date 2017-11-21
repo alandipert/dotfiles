@@ -17,6 +17,10 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win)
 		vis:info('expanding tabs')
 		vis:command('set expandtab')
 	end
+
+	if win.file.path and string.match(win.file.path, '.*/Jenkinsfile$') then
+		vis:command('set syntax groovy')
+	end
 end)
 
 vis:command_register("alan-fzf", function(argv, force, cur_win, selection, range)

@@ -99,3 +99,5 @@ erbenv() {
   export PATH="$HOME/.rbenv/bin:$PATH"
   $(which rbenv) && eval "$(rbenv init -)"
 }
+
+[[ ! -z "$TMUX" ]] && export TERM="screen-256color"
