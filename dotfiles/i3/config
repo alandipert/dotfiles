@@ -48,7 +48,9 @@ bindsym $mod+d exec ~/.i3/rofi.sh -show run -hlfg '#000000' -hlbg '#adff2f' -fg 
 #bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -fn 'Ubuntu Mono-12'"
 
 # start dmenu with window list
-bindsym $mod+Shift+d exec ~/.i3/window-jump
+# bindsym $mod+Shift+d exec ~/.i3/window-jump
+# bindsym $mod+Shift+d exec ~/.i3/rofi.sh -columns 2 -width 80 -show window -hlfg '#000000' -hlbg '#adff2f' -fg '#adff2f' -bg '#000000'
+bindsym $mod+Shift+d exec ~/.i3/rofi.sh -show window -hlfg '#000000' -hlbg '#adff2f' -fg '#adff2f' -bg '#000000'
 
 # jump to active slack window
 bindsym $mod+c exec exec ~/.i3/slack-jump
