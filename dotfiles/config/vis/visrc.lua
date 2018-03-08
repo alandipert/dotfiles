@@ -3,7 +3,7 @@ require('ctags')
 
 -- global init
 prev_win_title = nil
---vis.events.subscribe(vis.events.INIT, function()
+vis.events.subscribe(vis.events.INIT, function()
 --	vis:command('map normal <F2> <vis-redraw>')
 --	prev_win_title = io.popen("tmux display-message -p '#W'"):read()
 end)
