@@ -12,6 +12,7 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win)
 	vis:command('set cursorline')
 	vis:command('set tabwidth 2')
 	vis:command('set autoindent')
+	vis:command('set theme subtle-256')
 	-- If we're in an rstudio project, uses spaces for indentation instead of tabs.
 	if win.file.path and string.match(win.file.path, '^/Users/alandipert/github/rstudio') then
 		vis:info('expanding tabs')
