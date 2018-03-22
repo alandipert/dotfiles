@@ -1,5 +1,6 @@
 require('vis')
 require('ctags')
+require('vis-commentary')
 
 -- global init
 prev_win_title = nil

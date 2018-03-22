@@ -29,6 +29,10 @@ export HISTTIMEFORMAT='%F %T '
 # Searching in vis
 export FZF_DEFAULT_COMMAND='(git ls-files -co --exclude-standard || rg --files) 2> /dev/null'
 
+if [[ $(uname -s) == Darwin ]]; then
+	export PATH="${HOME}/Library/Python/3.6/bin/:${PATH}"
+fi
+
 function gc() { # (user-reponame-str)
   local FROM="git@github.com:${1?}"
   local TO="$HOME/github/${1?}"
@@ -99,3 +103,28 @@ erbenv() {
   export PATH="$HOME/.rbenv/bin:$PATH"
   $(which rbenv) && eval "$(rbenv init -)"
 }
+
+if [[ $(uname -s) == "Darwin" ]]; then
+	#list available jdks
+	alias jdks="/usr/libexec/java_home -V"
+	# jdk version switching - e.g. `jdk 6` will switch to version 1.6
+	function jdk() {
+	  echo "Switching java version $1";
+
+	  requestedVersion=$1
+	  oldStyleVersion=8
+	  # Set the version
+	  if [ $requestedVersion -gt $oldStyleVersion ]; then
+	    export JAVA_HOME=$(/usr/libexec/java_home -v $1);
+	  else
+	    export JAVA_HOME=`/usr/libexec/java_home -v 1.$1`;
+	  fi
+
+	  echo "Setting JAVA_HOME=$JAVA_HOME"
+
+	  which java
+	  java -version;
+	}
+fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
