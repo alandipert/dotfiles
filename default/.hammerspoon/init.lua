@@ -1,7 +1,6 @@
 hs.loadSpoon('ControlEscape'):start() -- Load Hammerspoon bits from https://github.com/jasonrudolph/ControlEscape.spoon
 hs.loadSpoon('WindowHalfsAndThirds')
 spoon.WindowHalfsAndThirds:bindHotkeys(spoon.WindowHalfsAndThirds.defaultHotkeys)
-spaces = require("hs._asm.undocumented.spaces")
 
 -- Move Mouse to center of next Monitor
 hs.hotkey.bind('cmd shift', ',', function()
