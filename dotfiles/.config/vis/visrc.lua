@@ -1,6 +1,7 @@
 require('vis')
 require('ctags')
 require('vis-commentary')
+require('vis-surround')
 
 -- global init
 prev_win_title = nil
