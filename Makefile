@@ -1,15 +1,7 @@
-DOTFILES_DIR := $(shell pwd)/dotfiles
-DOTFILES = $(wildcard ${DOTFILES_DIR}/.*/)
-
 .PHONY: install uninstall
 
-install: $(DOTFILES)
-	rsync -av $(DOTFILES_DIR)/ $(HOME)/
+install:
+	stow -v -t $(HOME) -S default
 
 uninstall:
-	for dotfile in $(DOTFILES); do \
-		rm -f $$(HOME)/$$(basename $$dotfile); \
-	done
-
-print-%:
-	@echo '$*=$($*)'
+	stow -v -t $(HOME) -D default
