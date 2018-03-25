@@ -88,6 +88,10 @@ vis:map(vis.modes.NORMAL, ";o", function()
 	vis:command('alan-fzf true')
 end)
 
+vis:map(vis.modes.NORMAL, "gd", function()
+	vis:feedkeys("*ggn")
+end)
+
 vis:map(vis.modes.NORMAL, ";wm", ":alan-only<Enter>")
 vis:map(vis.modes.NORMAL, ";wc", ":q<Enter>")
 vis:map(vis.modes.NORMAL, ";zz", ":alan-x<Enter>")
