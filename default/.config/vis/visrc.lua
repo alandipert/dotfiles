@@ -89,7 +89,7 @@ vis:map(vis.modes.NORMAL, ";o", function()
 end)
 
 vis:map(vis.modes.NORMAL, "gd", function()
-	vis:feedkeys("*ggn")
+	vis:feedkeys("#ggn")
 end)
 
 vis:map(vis.modes.NORMAL, ";wm", ":alan-only<Enter>")
