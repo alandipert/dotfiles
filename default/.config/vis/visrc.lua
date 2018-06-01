@@ -16,7 +16,7 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win)
 	vis:command('set cursorline')
 	vis:command('set tabwidth 2')
 	vis:command('set autoindent')
-	--vis:command('set expandtab on')
+	vis:command('set expandtab on')
 	if win.file.path then
 		filename = string.match(win.file.path, ".*/(.*)$")
 		if filename == "Jenkinsfile" then
@@ -29,10 +29,10 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win)
 	end
 	vis:command('set theme subtle-256')
 	-- If we're in an rstudio project, uses spaces for indentation instead of tabs.
-	if win.file.path and string.match(win.file.path, '^/Users/alandipert/github/rstudio') then
-		vis:info('expanding tabs')
-		vis:command('set expandtab')
-	end
+	-- if win.file.path and string.match(win.file.path, '^/Users/alandipert/github/rstudio') then
+		-- vis:info('expanding tabs')
+		-- vis:command('set expandtab')
+	-- end
 end)
 
 -- per window close
