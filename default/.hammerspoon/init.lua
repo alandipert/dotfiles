@@ -2,6 +2,8 @@ hs.loadSpoon('ControlEscape'):start() -- Load Hammerspoon bits from https://gith
 hs.loadSpoon('WindowHalfsAndThirds')
 spoon.WindowHalfsAndThirds:bindHotkeys(spoon.WindowHalfsAndThirds.defaultHotkeys)
 
+dofile("TextExpander.lua")
+
 -- Move Mouse to center of next Monitor
 hs.hotkey.bind('cmd shift', ',', function()
 	local win = hs.window.focusedWindow()
