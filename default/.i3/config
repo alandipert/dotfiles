@@ -221,9 +221,6 @@ mode "move" {
 }
 bindsym $mod+m mode "move"
 
-# Screenshot to Dropbox script
-bindsym --release $mod+Print exec ~/.i3/snap.sh
-
 # python stuff - need to:
 # sudo apt install python3-pip
 # sudo pip3 install i3ipc
@@ -258,8 +255,9 @@ for_window [title=".*Slack - Google Chrome.*"] move to workspace 1
 for_window [title=".*Mail - Google Chrome.*"] move to workspace 1
 for_window [class="zoom"] move to workspace 2
 
-# Make caps lock control, make momentary control escape
-exec setxkbmap -option ctrl:nocaps
+# Make caps lock control, swap alt/win, make momentary control escape
+exec_always --no-startup-id setxkbmap -option ctrl:nocaps 
+exec_always --no-startup-id setxkbmap -option altwin:swap_alt_win
 exec_always /usr/bin/xcape -e 'Control_L=Escape'
 
 # https://faq.i3wm.org/question/3747/enabling-multimedia-keys.1.html
