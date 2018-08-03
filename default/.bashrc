@@ -5,7 +5,7 @@ function where() {
   echo "${USER}@${HOSTNAME}"
 }
 
-export PROMPT_COMMAND='history -a;echo -ne "\033]0;bash ${PWD}\007";USER_HOST=$(where);PWD_ABBREV=$(mkgo ~/.bash/abbrev_pwd.c)'
+export PROMPT_COMMAND='history -a;echo -ne "\033]0;bash ${PWD}\007";USER_HOST=$(where);PWD_ABBREV=$(mkgo ~/.bash/abbrev_pwd.c);pwd>$HOME/.cwd'
 
 export PS1="\[\033[38;5;82m\]\${USER_HOST}\[\033[00m\]\[\033[38;5;200m\]\${PWD_ABBREV}\[\033[38;5;228m\]➜\[\033[00m\] "
 export PATH="${HOME}/.cabal/bin:${HOME}/.local/bin:/usr/local/bin:${PATH}"
@@ -128,3 +128,4 @@ if [[ $(uname -s) == "Darwin" ]]; then
 fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[[ -f "${HOME}/.cwd" ]] && cd "$(< ${HOME}/.cwd)"
