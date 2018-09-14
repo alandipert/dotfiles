@@ -30,7 +30,7 @@ export HISTTIMEFORMAT='%F %T '
 export FZF_DEFAULT_COMMAND='(git ls-files -co --exclude-standard || rg --files) 2> /dev/null'
 
 if [[ $(uname -s) == Darwin ]]; then
-	export PATH="${HOME}/Library/Python/3.6/bin/:${PATH}"
+	export PATH="${HOME}/Library/Python/3.7/bin/:${PATH}"
 fi
 
 function gc() { # (user-reponame-str)
