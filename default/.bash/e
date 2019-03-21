@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 if [[ $(uname -s) == "Darwin" ]]; then
   mvim --remote "$@"
-else if (which gvim &> /dev/null); then
+elif (which gvim > /dev/null); then
   gvim --remote "$@"
 else
   vim "$@"
