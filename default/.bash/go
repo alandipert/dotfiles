@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+OPTS=$(getopt c $*)
+
+if [[ $? != 0 ]]; then
+  echo "Failed parsing options." >&2
+  exit 1
+fi
+
+set -- $OPTS
+
+COPY=0
+
+while true; do
+  case "$1" in
+    -c)
+      COPY=1
+      shift
+      ;;
+    --)
+      shift
+      break
+      ;;
+    *)
+      echo "Unknown: $1"
+      ;;
+  esac
+done
+
+# Start exporting names
+set -a
+
+action () {
+  if [[ $COPY == 1 ]]; then
+    case "$(uname -s)" in
+      Darwin)
+        pbcopy
+        ;;
+      *)
+        xsel --clipboard
+        ;;
+    esac
+  else
+    unset -f $(declare -x -F | awk '{print $3}')
+    xargs "$EDITOR"
+  fi
+}
+
+abspath () {
+  cat <(pwd) - | paste -sd/ -
+}
+
+# Stop exporting names
+set +a
+
+if [[ -f .gitignore ]]; then
+  find * -type f \
+    | git check-ignore -nv --stdin \
+    | awk '/^::/{print $2}' \
+    | fzf \
+    | abspath \
+    | action
+else
+  find * -type f \
+    | fzf \
+    | abspath \
+    | action
+fi
+
