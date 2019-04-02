@@ -27,6 +27,10 @@ while true; do
   esac
 done
 
+abspath () {
+  ifne cat <(pwd) - | paste -sd/ -
+}
+
 # Start exporting names
 set -a
 
@@ -34,20 +38,16 @@ action () {
   if [[ $COPY == 1 ]]; then
     case "$(uname -s)" in
       Darwin)
-        pbcopy
+        abspath | ifne pbcopy
         ;;
       *)
-        xsel --clipboard
+        abspath | ifne xsel --clipboard
         ;;
     esac
   else
     unset -f $(declare -x -F | awk '{print $3}')
-    xargs "$EDITOR"
+    abspath | ifne xargs "$EDITOR"
   fi
-}
-
-abspath () {
-  cat <(pwd) - | paste -sd/ -
 }
 
 # Stop exporting names
@@ -58,12 +58,10 @@ if [[ -f .gitignore ]]; then
     | git check-ignore -nv --stdin \
     | awk '/^::/{print $2}' \
     | fzf \
-    | abspath \
     | action
 else
   find * -type f \
     | fzf \
-    | abspath \
     | action
 fi
 
